@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+/* My styles */
+
+.background {
+  background-color: #f6f9fc;
+  padding: 30px 0;
+  max-height: 100%;
+}
+
+/* Nav styles */
+
+.nav-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 15vw;
+  height: 5em;
+}
+
+.push {
+  margin-right: 10px;
+}
+
+/* Jumbotron styles */
+
+.jumbo-background {
+  background-image: url(./assets/dark-wood-and-vegetables.jpg);
+  background-size: cover;
+  height: 90vh;
+}
+
+.jumbo-text {
+  text-align: right;
+  margin-right: 10%;
+  color: white;
+  padding-top: 20%;
+}
+
+/* Recipe list styles */
+
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f6f9fc;
+  min-height: 95vh;
+}
+
+/* Recipe card styles */
+
+.recipe-card {
+  border: 1px solid #d8d8d8;
+  width: 65vw;
+  margin: 0.7rem auto;
+  padding: 15px 15px 0 15px;
+  background-color: white;
+}
+
+.recipe-image {
+  height: 256px;
+  width: 256px;
+  margin: 0 10px 10px 0;
+}
+
+.flex-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.delete-flex {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+}
+
+/* Recipe form styles */
+
+.form-container {
+  width: 60vw;
+  border: 1px solid #d8d8d8;
+  padding: 15px;
+  background-color: white;
+  margin: 0 auto;
+}
