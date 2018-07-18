@@ -21,7 +21,7 @@ class SingleRecipe extends Component {
     constructor(props) {
         super(props);
         this.state= {
-            note: null,
+            recipe: null,
             title: "",
             description: "",
             meal: "",
@@ -59,7 +59,7 @@ class SingleRecipe extends Component {
           .then(res => {
             console.log(res.data);
             this.setState({
-              note: res.data,
+              recipe: res.data,
               title: res.data.title,
               description: res.data.description,
               meal: res.data.meal,

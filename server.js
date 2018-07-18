@@ -73,9 +73,9 @@ server.get('/recipes/:id', (req, res) => {
 });
 
 server.post('/recipes', (req, res) => {
-  const note = { id: getRecipeId(), ...req.body };
+  const recipe = { id: getRecipeId(), ...req.body };
 
-  recipes = [...recipes, note];
+  recipes = [...recipes, recipe];
 
   res.send(recipes);
 });
@@ -116,6 +116,10 @@ server.delete('/recipes/:id', (req, res) => {
 
   res.send(recipes);
 });
+
+function getRecipeId() {
+  return recipeId++;
+}
 
 server.listen(port, err => {
   if (err) console.log(err);
