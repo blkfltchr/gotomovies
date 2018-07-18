@@ -1,34 +1,40 @@
 import React, { Component } from "react";
 import RecipeCard from "./RecipeCard";
+import axios from 'axios';
 
 class RecipeList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipes: []
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4444/recipes")
+      .then(response => {
+        this.setState({ recipes: response.data });
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   render() {
     return (
       <div className="recipe-list">
-        {this.props.recipes.map(recipe => {
+        {this.state.recipes.map(recipe => {
           return (
             <RecipeCard
-              title={recipe.title}
-              image={recipe.image}
-              description={recipe.description}
-              instructions={recipe.instructions}
-              ingredients={recipe.ingredients}
-              meal={recipe.meal}
-
               key={recipe.id}
-              recipe={recipe}
-              id={recipe.id}
-              deleteRecipe={this.props.deleteRecipe} />
+              recipe={recipe} />
           )
         })}
       </div>
     );
   }
-}
-
-RecipeCard.defaultProps = {
-  recipes: [],
 }
 
 export default RecipeList

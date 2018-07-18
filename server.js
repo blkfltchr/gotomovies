@@ -24,7 +24,8 @@ let recipes = [
       "Add oil and spinach to a frying pan. Once the spinach has started shrivelling up, break your desired number of eggs into the frying pan. Soon after, add beans. Once cooked, top with salsa and hot sauce.",
     ingredients: "eggs, black beans, spinach, salsa, hot sauce",
     image:
-      "https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg"
+      "https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg",
+      preptime: "15 minutes"
   },
   {
     id: 1,
@@ -37,7 +38,8 @@ let recipes = [
     ingredients:
       "spinach, salmon, carrots, broccoli, red peppers, ranch dressing",
     image:
-      "https://www.bbcgoodfood.com/sites/default/files/styles/bbcgf_recipe/public/user-recipe/Warm%20Salmon%20Salad_10.jpg?itok=YK8kZ71p"
+      "https://www.bbcgoodfood.com/sites/default/files/styles/bbcgf_recipe/public/user-recipe/Warm%20Salmon%20Salad_10.jpg?itok=YK8kZ71p",
+      preptime: "15 minutes"
   },
   {
     id: 2,
@@ -50,49 +52,32 @@ let recipes = [
     ingredients:
       "ground turkey, spaghetti squash, marinara sauce, mushrooms, tomatoes, red onions, yellow and orange peppers",
     image:
-      "https://images.meredith.com/content/dam/bhg/Images/recipecq/2013/05/RU203052.jpg.rendition.largest.jpg"
+      "https://images.meredith.com/content/dam/bhg/Images/recipecq/2013/05/RU203052.jpg.rendition.largest.jpg",
+      preptime: "1 hour 10 minutes"
   }
 ];
+
+let recipeId = 3;
 
 server.get("/recipes", (req, res) => {
   res.json(recipes);
 });
-let recipeId = 1;
 
-server.post("/recipes", (req, res) => {
-  const {
-    title,
-    description,
-    meal,
-    instructions,
-    ingredients,
-    image
-  } = req.body;
-  const newRecipe = {
-    title,
-    description,
-    meal,
-    instructions,
-    ingredients,
-    image,
-    id: recipeId
-  };
-  if (!title || !description || !meal) {
-    return sendUserError(
-      "Ya gone did recipeed! title/description/meal are all required to create a recipe in the recipe DB.",
-      res
-    );
-  }
-  const findRecipeByTitle = recipe => {
-    return recipe.title === title;
-  };
-  if (recipes.find(findRecipeByTitle)) {
-    return sendUserError(`${title} already exists in the recipe DB.`, res);
-  }
+server.get('/recipes/:id', (req, res) => {
 
-  recipes.push(newRecipe);
-  recipeId++;
-  res.json(recipes);
+  if (recipe = recipes.find(f => f.id == req.params.id)) {
+    res.status(200).json(recipe);
+  } else {
+    res.status(404).send({ msg: 'Recipe not found' });
+  }
+});
+
+server.post('/recipes', (req, res) => {
+  const note = { id: getRecipeId(), ...req.body };
+
+  recipes = [...recipes, note];
+
+  res.send(recipes);
 });
 
 server.put("/recipes/:id", (req, res) => {
@@ -103,7 +88,8 @@ server.put("/recipes/:id", (req, res) => {
     meal,
     instructions,
     ingredients,
-    image
+    image,
+    preptime
   } = req.body;
   const findRecipeById = recipe => {
     return recipe.id == id;
@@ -118,21 +104,17 @@ server.put("/recipes/:id", (req, res) => {
     if (instructions) foundeRecipe.instructions = instructions;
     if (ingredients) foundeRecipe.ingredients = ingredients;
     if (image) foundeRecipe.image = image;
+    if (preptime) foundeRecipe.preptime = preptime;
     res.json(recipes);
   }
 });
 
-server.delete("/recipes/:id", (req, res) => {
+server.delete('/recipes/:id', (req, res) => {
   const { id } = req.params;
-  const foundRecipe = recipes.find(recipe => recipe.id == id);
 
-  if (foundRecipe) {
-    const RecipeRemoved = { ...foundRecipe };
-    recipes = recipes.filter(recipe => recipe.id != id);
-    res.status(200).json(recipes);
-  } else {
-    sendUserError("No recipe by that ID exists in the recipe DB", res);
-  }
+  recipes = recipes.filter(f => f.id !== Number(id));
+
+  res.send(recipes);
 });
 
 server.listen(port, err => {

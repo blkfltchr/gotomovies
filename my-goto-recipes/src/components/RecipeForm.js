@@ -2,17 +2,22 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import "../App.css";
+import { Redirect } from "react-router-dom";
 
 class RecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredients: "",
-      title: "",
-      description: "",
-      instructions: "",
-      meal: "",
-      image: ""
+      edit: props.edit,
+      note: props.note,
+      title: props.title,
+      description: props.description,
+      instructions: props.instructions,
+      ingredients: props.ingredients,
+      meal: props.meal,
+      image: props.image,
+      preptime: props.preptime,
+      submitted: false
     };
   }
 
@@ -20,33 +25,55 @@ class RecipeForm extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  componentDidMount() {
+    if (!this.state.edit) {
+      console.log("creating new recipe");
+      this.setState({ title: "", description: "", instructions: "", ingredients: "", meal: "", image: "", preptime: "" });
+    } else {
+      console.log("updating recipe");
+    }
+  }
+
   addRecipe = event => {
     event.preventDefault();
-    const { ingredients, title, description, instructions, meal, image } = this.state
-    const newRecipe = { ingredients, title, description, instructions, meal, image }
+    const { ingredients, title, description, instructions, meal, image, preptime } = this.state
+    const newRecipe = { ingredients, title, description, instructions, meal, image, preptime }
     
-
+    if (this.state.edit) {
+      const updatedRecipes = Object.assign({}, newRecipe, {
+        id: this.state.recipe.id
+      });
     axios
-      .post("http://localhost:4444/recipes", newRecipe)
+      .post("http://localhost:4444/recipes", updatedRecipes)
       .then(response => {
         console.log(response.data);
-        this.props.updateRecipes(response.data);
+        this.setState({submitted: true});
       })
       .catch(err => console.log(err));
-      this.setState({
-        ingredients: "",
-        title: "",
-        description: "",
-        instructions: "",
-        meal: "",
-        image: ""
-      })
-      this.props.history.push('/recipes');
+    } else {
+      axios
+        .post("http://localhost:4444/recipes", newRecipe)
+        .then (res => {
+          console.log(res.data);
+          this.setState({
+            ingredients: "",
+            title: "",
+            description: "",
+            instructions: "",
+            meal: "",
+            image: "",
+            preptime: "",
+            submitted: true
+          })
+          .catch(err => console.log(err));
+        })
+    }
   };
 
   render() {
-    console.log(this.props);
-    return (
+    return this.state.submitted ? (
+      <Redirect to ="/recipes" /> 
+    ) : (
       <div className="background">
         <div className="form-container">
           <Form onSubmit={this.addRecipe}>
@@ -61,7 +88,7 @@ class RecipeForm extends Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label>Description</Label>
+              
               <Input
                 type="text"
                 onChange={this.handleInputChange}
@@ -117,6 +144,16 @@ class RecipeForm extends Component {
                 We recommend you find a square image that's at least 300x300
                 pixels.
               </FormText>
+            </FormGroup>
+            <FormGroup>
+              <Label>Preptime</Label>
+              <Input
+                onChange={this.handleInputChange}
+                name="preptime"
+                type="text"
+                placeholder="15 minutes"
+                value={this.state.preptime}
+              />
             </FormGroup>
             <Button>Add Recipe</Button>
           </Form>

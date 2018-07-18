@@ -1,3 +1,7 @@
+.App {
+  background-color: #f6f9fc;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -13,6 +17,10 @@ body {
 }
 
 /* Nav styles */
+
+.nav-background {
+  background: white;
+}
 
 .nav-flex {
   display: flex;
@@ -45,13 +53,41 @@ body {
 
 .recipe-list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f6f9fc;
+  align-items: flex-start;
   min-height: 95vh;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 70vw;
 }
 
-/* Recipe card styles */
+/* Recipe Card styles */
+
+.card-image {
+  height: 256px;
+  width: 256px;
+}
+
+.card-view {
+  border: 1px solid #d8d8d8;
+  width: 22.5vw;
+  margin: 0.7rem auto;
+  padding: 15px 15px 0px 15px;
+  height: 335px;
+  background-color: white;
+}
+
+.card-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.margin-bottom {
+  float: right;
+  max-height: 40px;
+}
+
+/* Single recipe styles */
 
 .recipe-card {
   border: 1px solid #d8d8d8;

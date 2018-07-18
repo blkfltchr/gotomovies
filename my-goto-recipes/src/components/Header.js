@@ -13,6 +13,7 @@ const StyledLink = styled(Link)`
 
 const Header = () => {
   return (
+    <div className="nav-background">
     <div className="nav-flex">
       <div>
         <h2 className="no-decoration"><StyledLink to="/">My go-to recipes.</StyledLink></h2>
@@ -23,6 +24,7 @@ const Header = () => {
         </NavLink>
         <NavLink to="/add">Add a recipe</NavLink>
       </div>
+    </div>
     </div>
   );
 };
