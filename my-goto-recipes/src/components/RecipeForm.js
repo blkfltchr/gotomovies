@@ -9,7 +9,7 @@ class RecipeForm extends Component {
     super(props);
     this.state = {
       edit: props.edit,
-      note: props.note,
+      recipe: props.recipe,
       title: props.title,
       description: props.description,
       instructions: props.instructions,
@@ -36,37 +36,29 @@ class RecipeForm extends Component {
 
   addRecipe = event => {
     event.preventDefault();
-    const { ingredients, title, description, instructions, meal, image, preptime } = this.state
-    const newRecipe = { ingredients, title, description, instructions, meal, image, preptime }
+    const { ingredients, title, description, instructions, meal, image, preptime } = this.state;
+    const newRecipe = { ingredients, title, description, instructions, meal, image, preptime };
     
     if (this.state.edit) {
       const updatedRecipes = Object.assign({}, newRecipe, {
         id: this.state.recipe.id
       });
     axios
-      .post("http://localhost:4444/recipes", updatedRecipes)
-      .then(response => {
-        console.log(response.data);
+      .put(`http://localhost:4444/recipes/${updatedRecipes.id}`, updatedRecipes)
+      .then(res => {
+        console.log(res.data);
         this.setState({submitted: true});
       })
       .catch(err => console.log(err));
     } else {
       axios
-        .post("http://localhost:4444/recipes", newRecipe)
+        .post(`http://localhost:4444/recipes`, newRecipe)
         .then (res => {
           console.log(res.data);
-          this.setState({
-            ingredients: "",
-            title: "",
-            description: "",
-            instructions: "",
-            meal: "",
-            image: "",
-            preptime: "",
-            submitted: true
+          this.setState({ title: "", description: "", meal: "", instructions: "", ingredients: "", image: "", preptime: "", submitted: true});
           })
-          .catch(err => console.log(err));
-        })
+          .catch(err => { console.log(err)
+          });
     }
   };
 
@@ -88,7 +80,7 @@ class RecipeForm extends Component {
               />
             </FormGroup>
             <FormGroup>
-              
+              <Label>Description</Label>
               <Input
                 type="text"
                 onChange={this.handleInputChange}
@@ -155,7 +147,7 @@ class RecipeForm extends Component {
                 value={this.state.preptime}
               />
             </FormGroup>
-            <Button>Add Recipe</Button>
+            <Button>Save Recipe</Button>
           </Form>
         </div>
       </div>

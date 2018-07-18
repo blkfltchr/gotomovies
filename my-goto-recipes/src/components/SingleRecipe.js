@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css'
-import { Button, Alert } from 'reactstrap';
+import { Alert } from 'reactstrap';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
 import Modal from "react-modal";
@@ -110,9 +110,8 @@ class SingleRecipe extends Component {
         <div>
           <div className="delete-flex">
             <h3>{this.state.title}</h3>
-            <Button onClick={this.openModal}>
-              X
-            </Button>
+            <i class="far fa-edit fa-2x" onClick={this.editRecipe}></i>
+            <i class="far fa-trash-alt fa-2x" onClick={this.openModal}></i>
           </div>
           <p className="recipe-description">{this.state.description}</p>
           <h5>Instructions</h5>

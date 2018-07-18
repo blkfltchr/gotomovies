@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #f6f9fc;
 }
 
 /* My styles */
@@ -70,7 +71,7 @@ body {
 .card-view {
   border: 1px solid #d8d8d8;
   width: 22.5vw;
-  margin: 0.7rem auto;
+  margin: 0.7rem;
   padding: 15px 15px 0px 15px;
   height: 335px;
   background-color: white;
@@ -112,6 +113,10 @@ body {
   display: flex;
   justify-content: space-between;
   height: 40px;
+}
+
+i {
+  cursor: pointer;
 }
 
 /* Recipe form styles */
