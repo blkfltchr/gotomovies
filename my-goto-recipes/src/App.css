@@ -50,6 +50,12 @@ body {
   padding-top: 20%;
 }
 
+.about {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+}
+
 /* Recipe list styles */
 
 .recipe-list {
@@ -58,7 +64,7 @@ body {
   min-height: 95vh;
   flex-wrap: wrap;
   margin: 0 auto;
-  max-width: 70vw;
+  max-width: 75vw;
 }
 
 /* Recipe Card styles */
@@ -70,7 +76,7 @@ body {
 
 .card-view {
   border: 1px solid #d8d8d8;
-  width: 22.5vw;
+  width: 22vw;
   margin: 0.7rem;
   padding: 15px 15px 0px 15px;
   height: 335px;
@@ -86,6 +92,7 @@ body {
 .margin-bottom {
   float: right;
   max-height: 40px;
+  margin-left: 5px;
 }
 
 /* Single recipe styles */
@@ -117,6 +124,7 @@ body {
 
 i {
   cursor: pointer;
+  margin-left: 10px;
 }
 
 /* Recipe form styles */
@@ -127,4 +135,34 @@ i {
   padding: 15px;
   background-color: white;
   margin: 0 auto;
+}
+
+/* Search styles */
+
+.searchbar {
+  margin: 10px auto;
+  width: 200px;
+}
+
+.search-suggestions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #606060;
+}
+
+/* Modal styles */
+
+.margin-right {
+  margin-right: 10px;
+}
+
+/* About styles */
+
+.about-text {
+  background-color: #f6f9fc;
+  margin: 0 auto;
+  width: 40vw;
+  padding: 5px 10px;
+  box-sizing: border-box;
 }

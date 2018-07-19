@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import '../App.css'
-import { Alert } from 'reactstrap';
+import { Alert, Button } from 'reactstrap';
 import axios from 'axios';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Modal from "react-modal";
 import RecipeForm from './RecipeForm';
 
@@ -55,7 +55,7 @@ class SingleRecipe extends Component {
       componentDidMount() {
         const id = this.props.match.params.id;
         axios
-          .get(`http://localhost:4444/recipes/${id}`)
+          .get(`http://localhost:5555/recipes/${id}`)
           .then(res => {
             console.log(res.data);
             this.setState({
@@ -80,7 +80,7 @@ class SingleRecipe extends Component {
 
       deleteRecipe = () => {
         axios
-          .delete(`http://localhost:4444/recipes/${this.state.recipe.id}`)
+          .delete(`http://localhost:5555/recipes/${this.state.recipe.id}`)
           .then(response => {
             console.log('Deleting!', response);
             this.setState({ deleted: true });
@@ -102,6 +102,7 @@ class SingleRecipe extends Component {
         image={this.state.image}
         preptime={this.state.preptime} />
   ) : (
+    <div>
     <div className="recipe-card">
       <div className="flex-wrapper">
         <div>
@@ -110,8 +111,10 @@ class SingleRecipe extends Component {
         <div>
           <div className="delete-flex">
             <h3>{this.state.title}</h3>
-            <i class="far fa-edit fa-2x" onClick={this.editRecipe}></i>
+            <div>
+            {/* <i class="far fa-edit fa-2x" onClick={this.editRecipe}></i> */}
             <i class="far fa-trash-alt fa-2x" onClick={this.openModal}></i>
+            </div>
           </div>
           <p className="recipe-description">{this.state.description}</p>
           <h5>Instructions</h5>
@@ -137,10 +140,12 @@ class SingleRecipe extends Component {
             <h2 ref={subtitle => (this.subtitle = subtitle)}>
               Are you sure you want to delete this?
             </h2>
-            <button onClick={this.deleteRecipe}>Delete</button>
-            <button onClick={this.closeModal}>No</button>
+            <Button onClick={this.deleteRecipe} className="margin-right">Yes, delete this recipe.</Button>
+            <Button onClick={this.closeModal}>No, keep it.</Button>
           </div>
         </Modal>
+    </div>
+    <Link to="/recipes"><div className="searchbar">View all the recipes...</div></Link>
     </div>
     )
   ;
