@@ -13,6 +13,7 @@ const RecipeJumbotron = () => {
           <Button tag={Link} to="/recipes" color="primary">Browse recipes</Button>
         </p>
         </div>
+        <Button tag={Link} to="/about" className="about">How I built this</Button>
     </div>
   );
 };

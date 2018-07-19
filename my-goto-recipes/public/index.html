@@ -38,5 +38,19 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBqyENltFlkgqk-XaT0E1WcsXirgEqmrJc",
+    authDomain: "my-goto-recipes.firebaseapp.com",
+    databaseURL: "https://my-goto-recipes.firebaseio.com",
+    projectId: "my-goto-recipes",
+    storageBucket: "my-goto-recipes.appspot.com",
+    messagingSenderId: "848845279575"
+  };
+  firebase.initializeApp(config);
+</script>
   </body>
 </html>

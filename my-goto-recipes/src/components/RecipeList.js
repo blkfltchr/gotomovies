@@ -12,7 +12,7 @@ class RecipeList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4444/recipes")
+      .get("http://localhost:5555/recipes")
       .then(response => {
         this.setState({ recipes: response.data });
         console.log(response.data);

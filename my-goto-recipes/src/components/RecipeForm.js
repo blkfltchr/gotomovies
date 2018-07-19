@@ -44,15 +44,17 @@ class RecipeForm extends Component {
         id: this.state.recipe.id
       });
     axios
-      .put(`http://localhost:4444/recipes/${updatedRecipes.id}`, updatedRecipes)
+      .put(`http://localhost:5555/recipes/${updatedRecipes.id}`, updatedRecipes)
       .then(res => {
         console.log(res.data);
         this.setState({submitted: true});
       })
-      .catch(err => console.log(err));
+      .catch(err => { 
+        console.log(err)
+      });
     } else {
       axios
-        .post(`http://localhost:4444/recipes`, newRecipe)
+        .post(`http://localhost:5555/recipes`, newRecipe)
         .then (res => {
           console.log(res.data);
           this.setState({ title: "", description: "", meal: "", instructions: "", ingredients: "", image: "", preptime: "", submitted: true});
