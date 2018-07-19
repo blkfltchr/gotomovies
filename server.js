@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const port = 4444;
+const port = 5555;
 
 const server = express();
 server.use(bodyParser.json());
@@ -48,16 +48,44 @@ let recipes = [
       "Chunks of ground turkey and grilled veggies with marinara sauce",
     meal: "dinner",
     instructions:
-      "Halve your squash, season it, and toss it in the oven at 450 for ~45 minutes. Throw bits of turkey into a pan with oil then add chopped veggies. When done, add marinara sauce, combine with squash and serve",
+      "Halve your squash, season it, and toss it in the oven at 450 for ~45 minutes. Throw bits of turkey into a pan with oil then add chopped veggies. When done, add marinara sauce, combine with squash and serve.",
     ingredients:
       "ground turkey, spaghetti squash, marinara sauce, mushrooms, tomatoes, red onions, yellow and orange peppers",
     image:
       "https://images.meredith.com/content/dam/bhg/Images/recipecq/2013/05/RU203052.jpg.rendition.largest.jpg",
       preptime: "1 hour 10 minutes"
+  },
+  {
+    id: 3,
+    title: "Fresh greens and roast veggies",
+    description:
+      "A bed of freshly picked kale, spinach, and lettuce. A roasted medley of beets, asparagus, sweet potatoes, carrots, and onions. Sprinkled with pieces of walnuts and dried cranberries and glazed with a maple balsamic dressing.",
+    meal: "lunch",
+    instructions:
+      "Chop up the veggies, spread them on a flat oven pan, and roast to your liking. In a big salad bowl, add the greens, the roasted veggies and the nuts and berries. In a bowl of your own, add dressing to your liking.",
+    ingredients:
+      "kale, spinach, lettuce, beets, asparagus, sweet potatoes, carrots, onions, walnuts, dried cranberries, maple balsamic dressing",
+    image:
+      "https://ibin.co/47YjPysi1UhG.jpg",
+      preptime: "50 minutes"
+  },
+  {
+    id: 4,
+    title: "Tofu tikka masala",
+    description:
+      "Spicy vegetarian tikka masala with assorted veggies",
+    meal: "dinner",
+    instructions:
+      "Chop sweet potatoes and toss them in the oven at 425. Add oil to a frying pan and add cauliflower, carrots, peppers, tomatoes in that order. Combine the sweet potatoes, tofu, baby corn and sauce then simmer until tender.",
+    ingredients:
+      "tofu, tikka masala sauce, tomatoes, cauliflower, yellow peppers, carrots, jalapeno peppers, baby corn, sweet potatoes",
+    image:
+      "https://ibin.co/49Bd2Tb4nCir.jpg",
+      preptime: "1 hour"
   }
 ];
 
-let recipeId = 3;
+let recipeId = 5;
 
 server.get("/recipes", (req, res) => {
   res.json(recipes);

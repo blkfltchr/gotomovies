@@ -5,6 +5,9 @@ import RecipeList from "./components/RecipeList";
 import RecipeForm from "./components/RecipeForm";
 import RecipeJumbotron from './components/RecipeJumbotron';
 import SingleRecipe from './components/SingleRecipe';
+import Search from './components/Search';
+import About from './components/About'
+
 
 class App extends Component {
   render() {
@@ -15,7 +18,9 @@ class App extends Component {
         <Route exact path="/add" component={RecipeForm} />
         <Route exact path="/recipes" component={RecipeList} />
         <Route path="/recipes/:id" component={SingleRecipe}/>
-        <Route path="/recipe/edit/:id" component={RecipeForm}/>
+        <Route path="/recipes/edit/:id" component={RecipeForm}/>
+        <Route path="/search" component={Search}/>
+        <Route path="/about" component={About}/>
       </div>
     );
   }
