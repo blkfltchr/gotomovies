@@ -60,23 +60,48 @@ body {
 
 .recipe-list {
   display: flex;
-  align-items: flex-start;
   min-height: 95vh;
   flex-wrap: wrap;
   margin: 0 auto;
-  max-width: 75vw;
+  max-width: 80vw;
+  justify-content: center;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.browse-meals {
+  text-align: center;
+  font-weight: 700;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.meal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.meal-button {
+  margin: 0 10px 10px 10px;
+  width: 100px
+}
+
+.meal-button:active:focus {
+  background-color: aqua;
 }
 
 /* Recipe Card styles */
 
 .card-image {
-  height: 256px;
-  width: 256px;
+  height: 216px;
+  width: 216px;
 }
 
 .card-view {
   border: 1px solid #d8d8d8;
-  width: 22vw;
+  max-width: 250px;
   margin: 0.7rem;
   padding: 15px 15px 0px 15px;
   height: 335px;
@@ -105,10 +130,26 @@ body {
   background-color: white;
 }
 
+@media (max-width: 965px) {
+  
+  .recipe-card {
+    width: 80vw;
+  }
+
+}
+
 .recipe-image {
   height: 256px;
   width: 256px;
   margin: 0 10px 10px 0;
+}
+
+@media (max-width: 720px) {
+  
+  .recipe-image {
+    display: none;
+  }
+
 }
 
 .flex-wrapper {
@@ -119,7 +160,6 @@ body {
 .delete-flex {
   display: flex;
   justify-content: space-between;
-  height: 40px;
 }
 
 i {
@@ -157,12 +197,33 @@ i {
   margin-right: 10px;
 }
 
+.modal-buttons {
+  display: flex;
+  justify-content: center
+}
+
 /* About styles */
 
 .about-text {
   background-color: #f6f9fc;
   margin: 0 auto;
-  width: 40vw;
+  width: 580px;
   padding: 5px 10px;
   box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .about-text {
+    width: 80vw;
+  }
+}
+
+.center-textbox {
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.about-image {
+  max-width: 38vw;
+  margin-bottom: 10px;
 }
