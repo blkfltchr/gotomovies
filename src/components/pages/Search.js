@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RecipeCard from "./RecipeCard";
+import RecipeCard from "../recipes/RecipeCard";
 import axios from "axios";
 import {Form, Input} from 'reactstrap'
 

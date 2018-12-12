@@ -15,7 +15,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const Header = () => {
+const NavBar = () => {
   return (
     <div className="nav-background">
       <div className="nav-flex">
@@ -38,4 +38,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default NavBar;

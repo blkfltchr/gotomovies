@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import "../App.css";
+import "../../App.css";
 import { Redirect } from "react-router-dom";
 
 class RecipeForm extends Component {

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import Header from './components/Header';
-import RecipeList from "./components/RecipeList";
-import RecipeForm from "./components/RecipeForm";
-import RecipeJumbotron from './components/RecipeJumbotron';
-import SingleRecipe from './components/SingleRecipe';
-import Search from './components/Search';
+import Header from './components/layout/NavBar';
+import RecipeList from "./components/recipes/RecipeList";
+import RecipeForm from "./components/recipes/RecipeForm";
+import RecipeJumbotron from './components/recipes/RecipeJumbotron';
+import SingleRecipe from './components/recipes/SingleRecipe';
+import Search from './components/pages/Search';
 // import About from './components/About'
-
 
 class App extends Component {
   render() {

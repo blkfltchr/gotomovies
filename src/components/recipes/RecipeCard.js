@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css'
+import '../../App.css'
 import { Button } from 'reactstrap';
 import {Link} from "react-router-dom";
 import styled from 'styled-components'
