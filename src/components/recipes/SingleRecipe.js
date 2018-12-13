@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../App.css";
-import { Alert, Button } from "reactstrap";
+import { Card, Alert, Button } from "reactstrap";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import Modal from "react-modal";
@@ -23,22 +23,18 @@ class SingleRecipe extends Component {
       deleted: false,
       modalIsOpen: false
     };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal() {
+  openModal =() => {
     this.setState({ modalIsOpen: true });
   }
 
-  afterOpenModal() {
+  afterOpenModal =() => {
     // references are now sync'd and can be accessed.
     this.subtitle.style.color = "#00";
   }
 
-  closeModal() {
+  closeModal =() => {
     this.setState({ modalIsOpen: false });
   }
 
@@ -48,16 +44,6 @@ class SingleRecipe extends Component {
       .get(`http://localhost:5555/recipes/${id}`)
       .then(res => {
         console.log(res.data);
-        this.setState({
-          recipe: res.data,
-          title: res.data.title,
-          description: res.data.description,
-          meal: res.data.meal,
-          instructions: res.data.instructions,
-          ingredients: res.data.ingredients,
-          image: res.data.image,
-          preptime: res.data.preptime
-        });
       })
       .catch(err => {
         console.log(err);
@@ -83,16 +69,16 @@ class SingleRecipe extends Component {
           <div className="flex-wrapper">
             <div>
               <img
-                src={this.state.image}
-                alt={this.state.title}
+                src="https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg"
+                alt="Healthy eggs"
                 className="recipe-image"
               />
             </div>
             <div>
               <div className="delete-flex">
-                <h3>{this.state.title}</h3>
+                <h3>Healthy eggs</h3>
                 <div>
-                  {/* <i class="far fa-edit fa-2x" onClick={this.editRecipe}></i> */}
+                  <i class="far fa-edit fa-2x"></i>
                   <i
                     class="far fa-trash-alt fa-2x delete-icon"
                     onClick={this.openModal}
@@ -100,18 +86,18 @@ class SingleRecipe extends Component {
                 </div>
               </div>
               <div>
-                <p className="recipe-description">{this.state.description}</p>
+                <p className="recipe-description">Fried eggs with beans and spinach, topped with salsa and hot sauce</p>
                 <h5>Instructions</h5>
-                <p className="recipe-instructions">{this.state.instructions}</p>
+                <p className="recipe-instructions">Add oil and spinach to a frying pan. Once the spinach has started shrivelling up, break your desired number of eggs into the frying pan. Soon after, add beans. Once cooked, top with salsa and hot sauce.</p>
                 <h5>Ingredients</h5>
-                <p className="recipe-ingredients">{this.state.ingredients}</p>
+                <p className="recipe-ingredients">eggs, black beans, spinach, salsa, hot sauce</p>
                 <h5>Preptime</h5>
-                <p className="recipe-preptime">{this.state.preptime}</p>
+                <p className="recipe-preptime">15 minutes</p>
               </div>
             </div>
           </div>
           <Alert color="info">
-            This meal is intended for <strong>{this.state.meal}</strong> but
+            This meal is intended for <strong>breakfast</strong> but
             rules are meant to be broken.
           </Alert>
           <Modal
@@ -123,7 +109,7 @@ class SingleRecipe extends Component {
           >
             <div>
               <h4 ref={subtitle => (this.subtitle = subtitle)}>
-                Are you sure you want to delete the <br/> {this.state.title}?
+                Are you sure you want to delete the <br/> Healthy eggs?
               </h4>
               <div className="modal-buttons">
                 <Button color="danger" onClick={this.deleteRecipe} className="margin-right">

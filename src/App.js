@@ -16,7 +16,7 @@ class App extends Component {
         <Route exact path="/" component={RecipeJumbotron} />
         <Route exact path="/add" component={RecipeForm} />
         <Route exact path="/recipes" component={RecipeList} />
-        <Route path="/recipes/:id" component={SingleRecipe}/>
+        <Route path="/recipes/healthy-eggs" component={SingleRecipe}/>
         <Route path="/recipes/edit/:id" component={RecipeForm}/>
         <Route path="/search" component={Search}/>
         {/* <Route path="/about" component={About}/> */}
