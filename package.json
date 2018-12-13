@@ -1,5 +1,6 @@
 {
   "name": "village",
+  "Developers": ["Edward Gonzalez", "Blake Fletcher"],
   "version": "0.1.0",
   "private": true,
   "dependencies": {
