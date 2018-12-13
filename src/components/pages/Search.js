@@ -47,10 +47,7 @@ class Search extends Component {
         </ul>
         <div className="recipe-list">
           {this.state.recipes.map(recipe => {
-            if (this.state.search === "") {
-              return 
-              <RecipeCard key={recipe.id} recipe={recipe} />;
-            } else if (
+            if (
               recipe.ingredients
                 .toLowerCase()
                 .includes(this.state.search.toLowerCase())
