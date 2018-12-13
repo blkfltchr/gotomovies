@@ -1,37 +1,17 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
-import styled from "styled-components";
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-    color: black;
-  }
-`;
 
 const NavBar = () => {
   return (
-    <div className="nav-background">
-      <div className="nav-flex">
-        <div>
-          <h2 className="no-decoration">
-            <StyledLink to="/">My go-to recipes.</StyledLink>
-          </h2>
-        </div>
-        <div className="flex-wrapper">
-          <NavLink className="push" to="/recipes">
-            My recipes
-          </NavLink>
-          <NavLink to="/add">Add a recipe</NavLink>
-          <Link to="/search">
-            <i class="fas fa-search" />
-          </Link>
+    <div className="navbar navbar-expand-sm navbar-light bg-white">
+      <a className="navbar-brand" href="/">GoToRecipes</a>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div className="navbar">
+          <a className="nav-item nav-link active" href="/recipes">My recipes</a>
+          <a className="nav-item nav-link active" href="/add">Add a recipe</a>
+          <a className="nav-item nav-link active" href="/search"><i className="fas fa-search" /></a>
         </div>
       </div>
     </div>

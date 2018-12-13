@@ -17,24 +17,6 @@ body {
   max-height: 100%;
 }
 
-/* Nav styles */
-
-.nav-background {
-  background: white;
-}
-
-.nav-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 15vw;
-  height: 5em;
-}
-
-.push {
-  margin-right: 10px;
-}
-
 /* Jumbotron styles */
 
 .jumbo-background {
