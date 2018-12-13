@@ -2,8 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import {Card, CardImg, CardBody, CardTitle, Button} from 'reactstrap';
 
-const RecipeCard = () => {
-  
+const RecipeCard = (props) => {
+  console.log(props)
   return (
     <Link to={`/recipes/healthy-eggs`}> 
       <Card>
