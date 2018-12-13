@@ -8,15 +8,6 @@ class RecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      edit: props.edit,
-      recipe: props.recipe,
-      title: props.title,
-      description: props.description,
-      instructions: props.instructions,
-      ingredients: props.ingredients,
-      meal: props.meal,
-      image: props.image,
-      preptime: props.preptime,
       submitted: false
     };
   }
@@ -24,15 +15,6 @@ class RecipeForm extends Component {
   handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
-  componentDidMount() {
-    if (!this.state.edit) {
-      console.log("creating new recipe");
-      this.setState({ title: "", description: "", instructions: "", ingredients: "", meal: "", image: "", preptime: "" });
-    } else {
-      console.log("updating recipe");
-    }
-  }
 
   addRecipe = event => {
     event.preventDefault();

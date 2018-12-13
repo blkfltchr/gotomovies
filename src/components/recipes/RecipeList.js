@@ -47,7 +47,11 @@ class RecipeList extends Component {
         </div>
         <div className="center">
       <div className="recipe-list">
-        <RecipeCard recipesData={recipesData}/>
+      {recipesData.map((recipe) => {
+        return (
+          <RecipeCard recipe={recipe}/>
+        )
+      })}
       </div>
       </div>
       </div>
