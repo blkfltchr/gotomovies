@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {Card, CardImg, CardBody, CardTitle, Button} from 'reactstrap';
 
 const RecipeCard = (props) => {
-  console.log(props)
+  console.log('Props', props)
   return (
     <Link to={`/recipes/healthy-eggs`}> 
       <Card>
