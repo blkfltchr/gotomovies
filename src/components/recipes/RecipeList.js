@@ -49,7 +49,7 @@ class RecipeList extends Component {
       <div className="recipe-list">
       {recipesData.map((recipe) => {
         return (
-          <RecipeCard recipe={recipe}/>
+          <RecipeCard key={recipe.id} recipe={recipe}/>
         )
       })}
       </div>

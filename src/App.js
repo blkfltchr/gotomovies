@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+
 import Header from './components/layout/NavBar';
 import RecipeList from "./components/recipes/RecipeList";
 import RecipeForm from "./components/recipes/RecipeForm";
 import RecipeJumbotron from './components/recipes/RecipeJumbotron';
 import SingleRecipe from './components/recipes/SingleRecipe';
 import Search from './components/pages/Search';
-// import About from './components/About'
 
 class App extends Component {
   render() {
@@ -19,7 +19,6 @@ class App extends Component {
         <Route path="/recipes/healthy-eggs" component={SingleRecipe}/>
         <Route path="/recipes/edit/:id" component={RecipeForm}/>
         <Route path="/search" component={Search}/>
-        {/* <Route path="/about" component={About}/> */}
       </div>
     );
   }
