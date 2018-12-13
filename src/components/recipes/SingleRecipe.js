@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../App.css";
-import { Card, Alert, Button } from "reactstrap";
+import { Alert, Button } from "reactstrap";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import Modal from "react-modal";
