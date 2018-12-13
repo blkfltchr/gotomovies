@@ -1,35 +1,19 @@
 import React from 'react';
-import '../../App.css'
-import { Button } from 'reactstrap';
-import {Link} from "react-router-dom";
-import styled from 'styled-components'
+import {Link} from 'react-router-dom'
+import {Card, CardImg, CardBody, CardTitle, Button} from 'reactstrap';
 
-const StyledLink = styled(Link)`
-    text-decoration: none;
-
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-        color: black;
-    }
-`;
-
-const RecipeCard = props => {
-  const {
-    title,
-    image
-  } = props.recipe;
+const RecipeCard = () => {
+  
   return (
-    <StyledLink to={`/recipes/${props.recipe.id}`}>
-    <div className="card-view">
-          <img src={image} alt={title} className="card-image" />
-          <div className="card-details">
-            <p><b>{title}</b></p>
-            <Button className="margin-bottom">
-              Full recipe
-            </Button>
-        </div>
-      </div>
-      </StyledLink>
+    <Link to={`/recipes/`}> 
+      <Card>
+        <CardImg style={{height: "216px", width: "216px"}} top width="100%" src="https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg" alt="Healthy eggs"/>
+        <CardBody>
+          <CardTitle>Healthy Eggs</CardTitle>
+          <Button>Full recipe</Button>
+        </CardBody>
+      </Card>
+    </Link>
   );
 }
 
