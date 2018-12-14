@@ -2,15 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardImg, CardBody, CardTitle, Button } from 'reactstrap'
 
-const RecipeCard = () => {
+const RecipeCard = (props) => {
+  console.log("recipe card props", props)
   return (
     <Link to='/recipes/healthy-eggs'>
       <Card>
         <CardImg
           style={{ height: '216px', width: '216px' }}
           top width='100%'
-          src='https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg'
-          alt='Healthy eggs' />
+          src={props.recipe.image}
+          alt={props.recipe.title} />
         <CardBody>
           <CardTitle>{props.recipe.title}</CardTitle>
           <Button>Full recipe</Button>
