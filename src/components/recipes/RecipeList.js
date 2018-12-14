@@ -33,7 +33,7 @@ class RecipeList extends Component {
         preptime: '15 minutes'
       }
     ]
-
+    
     return (
       <div>
         <p className='browse-meals'>Browse recipes by meal</p>
@@ -45,7 +45,11 @@ class RecipeList extends Component {
         </div>
         <div className='center'>
           <div className='recipe-list'>
-            <RecipeCard recipesData={recipesData} />
+            {recipesData.map((recipe) => {
+              return (
+                <RecipeCard key={recipe.id} recipe={recipe} />
+              )
+            })}
           </div>
         </div>
       </div>
