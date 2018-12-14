@@ -1,21 +1,23 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
-import {Card, CardImg, CardBody, CardTitle, Button} from 'reactstrap';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Card, CardImg, CardBody, CardTitle, Button } from 'reactstrap'
 
-const RecipeCard = (props) => {
-  console.log('Props', props)
+const RecipeCard = () => {
   return (
-    <Link to={`/recipes/healthy-eggs`}> 
-      <Card style={{padding: "10px", margin: "10px"}}>
-        <CardImg style={{height: "216px", width: "216px", margin: "0 auto"}} top width="100%" src={props.recipe.image} alt="Healthy eggs"/>
+    <Link to='/recipes/healthy-eggs'>
+      <Card>
+        <CardImg
+          style={{ height: '216px', width: '216px' }}
+          top width='100%'
+          src='https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg'
+          alt='Healthy eggs' />
         <CardBody>
           <CardTitle>{props.recipe.title}</CardTitle>
           <Button>Full recipe</Button>
         </CardBody>
       </Card>
     </Link>
-  );
+  )
 }
 
-export default RecipeCard;
-
+export default RecipeCard
