@@ -33,7 +33,7 @@ class RecipeList extends Component {
         preptime: '15 minutes'
       }
     ]
-    
+
     return (
       <div>
         <p className='browse-meals'>Browse recipes by meal</p>

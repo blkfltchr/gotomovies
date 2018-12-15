@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardImg, CardBody, CardTitle, Button } from 'reactstrap'
+import PropTypes from 'prop-types'
 
 const RecipeCard = (props) => {
-  console.log("recipe card props", props)
   return (
     <Link to='/recipes/healthy-eggs'>
       <Card>
@@ -19,6 +19,13 @@ const RecipeCard = (props) => {
       </Card>
     </Link>
   )
+}
+
+RecipeCard.propTypes = {
+  recipe: {
+    image: PropTypes.string,
+    title: PropTypes.title
+  }
 }
 
 export default RecipeCard
