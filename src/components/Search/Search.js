@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import RecipeCard from '../recipes/RecipeCard'
+import RecipeCard from '../Recipe/RecipeCard'
 import axios from 'axios'
 import { Form, Input, Button } from 'reactstrap'
+const apiId = process.env.REACT_APP_API_ID
+const apiKey = process.env.REACT_APP_API_KEY
 
 class Search extends Component {
   constructor () {
     super()
     this.state = {
+      recipes: [],
       searchText: ''
     }
   }
@@ -18,13 +21,22 @@ class Search extends Component {
   }
 
   find = (event) => {
-    axios.post(`https://api.edamam.com/search?q=${this.state.searchText}&app_id=e8e8b56e&app_key=be2248e2f3aac475b0727f4d57f53f4c`)
+    event.preventDefault()
+    axios.post(`https://api.edamam.com/search?q=${this.state.searchText}&app_id=${apiId}&app_key=${apiKey}`)
+      .then(response => {
+        this.setState({
+          recipes: response.data.hits
+        })
+      })
+      .catch(error => console.log('Error', error))
   }
 
   render () {
     return (
       <div>
-        <Form action={this.find} className='searchbar'>
+        <Form
+          onSubmit={this.find}
+          className='searchbar'>
           <Input
             name='searchText'
             type='text'
@@ -35,17 +47,9 @@ class Search extends Component {
           <Button>Find</Button>
         </Form>
         <div className='recipe-list'>
-          {this.state.recipes.map(recipe => {
-            if (
-              recipe.ingredients
-                .toLowerCase()
-                .includes(this.state.search.toLowerCase())
-            ) {
-              return <RecipeCard recipe={recipe} key={recipe.id} />
-            } else {
-              return null
-            }
-          })}
+          {this.state.recipes.map((recipe, index) =>
+            <RecipeCard key={index} recipe={recipe.recipe} />
+          )}
         </div>
       </div>
     )

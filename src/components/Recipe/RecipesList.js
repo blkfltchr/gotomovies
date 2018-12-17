@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import RecipeCard from './RecipeCard'
 import { Button } from 'reactstrap'
 
 class RecipeList extends Component {
   render () {
-  const recipesData = [
     return (
       <div>
         <p className='browse-meals'>Browse recipes by meal</p>
@@ -15,13 +13,8 @@ class RecipeList extends Component {
           <Button className='meal-button'>Dinner</Button>
         </div>
         <div className='center'>
-          <div className='recipe-list'>
-            {recipesData.map((recipe) => {
-              return (
-                <RecipeCard key={recipe.id} recipe={recipe} />
-              )
-            })}
-          </div>
+          {/* <div className='recipe-list'>
+          </div> */}
         </div>
       </div>
     )

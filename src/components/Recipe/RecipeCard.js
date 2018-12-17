@@ -1,31 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Card, CardImg, CardBody, CardTitle, Button } from 'reactstrap'
+import { Card, CardBody, CardTitle, CardImg } from 'reactstrap'
 import PropTypes from 'prop-types'
 
 const RecipeCard = (props) => {
   return (
-    <Link to='/recipes/healthy-eggs'>
-      <Card>
+    <Card>
+      <CardBody>
+        <CardTitle>{props.recipe.label}</CardTitle>
         <CardImg
           style={{ height: '216px', width: '216px' }}
           top width='100%'
           src={props.recipe.image}
-          alt={props.recipe.title} />
-        <CardBody>
-          <CardTitle>{props.recipe.title}</CardTitle>
-          <Button>Full recipe</Button>
-        </CardBody>
-      </Card>
-    </Link>
+          alt={props.recipe.label} />
+      </CardBody>
+    </Card>
   )
 }
 
 RecipeCard.propTypes = {
-  recipe: {
-    image: PropTypes.string,
-    title: PropTypes.title
-  }
+  recipe: PropTypes.shape({
+    label: PropTypes.label,
+    image: PropTypes.string
+  })
 }
 
 export default RecipeCard
