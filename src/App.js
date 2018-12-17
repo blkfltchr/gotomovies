@@ -5,7 +5,6 @@ import AddRecipe from './components/Recipe/AddRecipe'
 // import RecipesList from './components/Recipe/RecipesList'
 // import SingleRecipe from './components/Recipe/SingleRecipe'
 import Search from './components/Search/Search'
-// import About from './components/About'
 
 class App extends Component {
   render () {
