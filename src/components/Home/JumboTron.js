@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
-const RecipeJumbotron = () => {
+const JumboTron = () => {
   return (
     <div className='jumbo-background'>
       <div className='jumbo-text'>
@@ -10,7 +10,11 @@ const RecipeJumbotron = () => {
         <p className='lead'>No more forgetting, no more searching, no more indecision.</p>
         <p className='lead'>My go-to recipes helps you cook great meals for breakfast, lunch, and dinner.</p>
         <p className='lead'>
-          <Button tag={Link} to='/recipes' color='primary'>Browse recipes</Button>
+          <Button
+            tag={Link}
+            to='/recipes'
+            color='primary'>Browse recipes
+          </Button>
         </p>
       </div>
       {/* <Button tag={Link} to='/about' className='about'>How I built this</Button> */}
@@ -18,4 +22,4 @@ const RecipeJumbotron = () => {
   )
 }
 
-export default RecipeJumbotron
+export default JumboTron
