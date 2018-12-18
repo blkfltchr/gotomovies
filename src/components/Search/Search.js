@@ -22,7 +22,7 @@ class Search extends Component {
 
   find = (event) => {
     event.preventDefault()
-    axios.post(`https://api.edamam.com/search?q=${this.state.searchText}&app_id=${apiId}&app_key=${apiKey}`)
+    axios.get(`https://api.edamam.com/search?q=${this.state.searchText}&app_id=${apiId}&app_key=${apiKey}`)
       .then(response => {
         this.setState({
           recipes: response.data.hits
