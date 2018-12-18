@@ -43,7 +43,6 @@ class Recipes extends Component {
 }
 
 Recipes.propTypes = {
-  firestore: PropTypes.object.isRequired,
   recipes: PropTypes.array
 }
 
