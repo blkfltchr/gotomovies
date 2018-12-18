@@ -29,7 +29,7 @@ firestore.settings(settings)
 // Add reactReduxFirebase enhancer when making store creator
 const createStoreWithFirebase = compose(
   reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
-  reduxFirestore(firebase)
+  reduxFirestore(firebase, rrfConfig)
 )(createStore)
 
 const rootReducer = combineReducers({
