@@ -19,29 +19,35 @@ const rrfConfig = {
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 }
 
-// Initialize firebase instance
+// Init firebase instance
 firebase.initializeApp(firebaseConfig)
-// const firestore = firebase.firestore() // <- needed if using firestore
+// Init firestore
+const firestore = firebase.firestore()
+const settings = { timestampsInSnapshots: true }
+firestore.settings(settings)
 
 // Add reactReduxFirebase enhancer when making store creator
 const createStoreWithFirebase = compose(
   reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
-  reduxFirestore(firebase) // <- needed if using firestore
+  reduxFirestore(firebase)
 )(createStore)
 
-// Add firebase to reducers
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
-  firestore: firestoreReducer // <- needed if using firestore
+  firestore: firestoreReducer
 })
 
-//  Initial state
+// Create initial state
 const initialState = {}
 
-// Store with reducers
-const store = createStoreWithFirebase(rootReducer, initialState, compose(
-  reactReduxFirebase(firebase),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-))
+// Create store
+const store = createStoreWithFirebase(
+  rootReducer,
+  initialState,
+  compose(
+    reactReduxFirebase(firebase),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+)
 
 export default store
