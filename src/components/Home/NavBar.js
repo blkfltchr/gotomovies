@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
   return (
     <div className='navbar navbar-expand-sm navbar-light bg-white'>
-      <a className='navbar-brand' href='/'>GoToRecipes</a>
+      <Link to='/'>GoToRecipes</Link>
       <button
         className='navbar-toggler'
         type='button'
@@ -16,9 +17,9 @@ const NavBar = () => {
       </button>
       <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
         <div className='navbar'>
-          <a className='nav-item nav-link active' href='/recipes'>My recipes</a>
-          <a className='nav-item nav-link active' href='/add'>Add a recipe</a>
-          <a className='nav-item nav-link active' href='/search'><i className='fas fa-search' /></a>
+          <Link className='nav-item nav-link active' to='/recipes'>My recipes</Link>
+          <Link className='nav-item nav-link active' to='/addrecipe'>Add a recipe</Link>
+          <Link className='nav-item nav-link active' to='/search'><i className='fas fa-search' /></Link>
         </div>
       </div>
     </div>
