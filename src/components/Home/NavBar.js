@@ -18,7 +18,7 @@ const NavBar = () => {
       <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
         <div className='navbar'>
           <Link className='nav-item nav-link active' to='/recipes'>My recipes</Link>
-          <Link className='nav-item nav-link active' to='/addrecipe'>Add a recipe</Link>
+          <Link className='nav-item nav-link active' to='/recipes/add'>Add a recipe</Link>
           <Link className='nav-item nav-link active' to='/search'><i className='fas fa-search' /></Link>
         </div>
       </div>
