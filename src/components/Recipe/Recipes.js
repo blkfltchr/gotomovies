@@ -5,6 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import RecipeCard from './RecipeCard'
+import AddRecipeCard from './AddRecipeCard'
 import { Button } from 'reactstrap'
 
 class Recipes extends Component {
@@ -30,6 +31,7 @@ class Recipes extends Component {
                   </Link>
                 )
               })}
+              <AddRecipeCard />
             </div>
           </div>
         </div>
