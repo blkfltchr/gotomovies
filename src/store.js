@@ -3,25 +3,34 @@ import firebase from 'firebase'
 import 'firebase/firestore'
 import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
 import { reduxFirestore, firestoreReducer } from 'redux-firestore'
+const {
+  REACT_APP_API_KEY,
+  REACT_APP_AUTH,
+  REACT_APP_DATABASE,
+  REACT_APP_PROJECT_ID,
+  REACT_APP_STORAGE,
+  REACT_APP_SEND_ID
+} = process.env
 // import 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBaayrHhgqKEVKFOMh-z0QFgPrqC3lZoW4',
-  authDomain: 'gotorecipes-b3714.firebaseapp.com',
-  databaseURL: 'https://gotorecipes-b3714.firebaseio.com',
-  projectId: 'gotorecipes-b3714',
-  storageBucket: 'gotorecipes-b3714.appspot.com',
-  messagingSenderId: '715471095704'
+  apiKey: REACT_APP_API_KEY,
+  authDomain: REACT_APP_AUTH,
+  databaseURL: REACT_APP_DATABASE,
+  projectId: REACT_APP_PROJECT_ID,
+  storageBucket: REACT_APP_STORAGE,
+  messagingSenderId: REACT_APP_SEND_ID
 } // from Firebase Console
 
 // react-redux-firebase config
 const rrfConfig = {
-  userProfile: 'users', // firebase root where user profiles are stored
+  userProfile: 'users', // Firebase root where user profiles are stored
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 }
 
 // Initialize firebase instance
 firebase.initializeApp(firebaseConfig)
+
 // Initialize Cloud Firestore through Firebase
 const firestore = firebase.firestore()
 const settings = { timestampsInSnapshots: true }
