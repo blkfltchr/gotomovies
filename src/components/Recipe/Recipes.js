@@ -9,7 +9,26 @@ import AddRecipeCard from './AddRecipeCard'
 import { Button } from 'reactstrap'
 
 class Recipes extends Component {
+  // state to show which meal type we want to render
+  // default mealType: 'all'
+  // onClick function that changes this.state.mealType to breakfast, lunch or dinner
+  // if this.state.mealtype === breakfast
+  // recipes.filter (this.state.mealtype === recipe.meal)
+
+  state = {
+    recipes: []
+  }
+
+  componentDidMount () {
+    console.log('CDM props', this.props)
+  }
+
+  componentDidUpdate () {
+    console.log('CDU props', this.props)
+  }
+
   render () {
+    console.log('Render props', this.props)
     const { recipes } = this.props
 
     if (recipes) {
@@ -27,8 +46,8 @@ class Recipes extends Component {
               <AddRecipeCard />
               {recipes.map(recipe => {
                 return (
-                  <Link to={`/recipes/${recipe.id}`}>
-                    <RecipeCard key={recipe.id} recipe={recipe} />
+                  <Link key={recipe.id} to={`/recipes/${recipe.id}`}>
+                    <RecipeCard recipe={recipe} />
                   </Link>
                 )
               })}
