@@ -24,6 +24,7 @@ class Recipes extends Component {
           </div>
           <div className='center'>
             <div className='recipe-list'>
+              <AddRecipeCard />
               {recipes.map(recipe => {
                 return (
                   <Link to={`/recipes/${recipe.id}`}>
@@ -31,7 +32,6 @@ class Recipes extends Component {
                   </Link>
                 )
               })}
-              <AddRecipeCard />
             </div>
           </div>
         </div>
