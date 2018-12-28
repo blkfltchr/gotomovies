@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import NavBar from './components/Home/NavBar'
-import Home from './components/Home/Home'
-import Recipes from './components/Recipe/Recipes'
-import Search from './components/Search/Search'
-import SingleRecipe from './components/Recipe/SingleRecipe'
-import AddRecipe from './components/Recipe/AddRecipe'
+
+import Navigation from '../Navigation'
+import Landing from '../Landing'
+import Recipes from '../Recipes'
+import Search from '../Search'
+import SingleRecipe from '../SingleRecipe'
+import AddRecipe from '../AddRecipe'
 
 class App extends Component {
   render () {
     return (
       <div className='App'>
-        <NavBar />
+        <Navigation />
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Landing} />
           <Route exact path='/recipes' component={Recipes} />
           <Route exact path='/search' component={Search} />
           <Route exact path='/recipes/add' component={AddRecipe} />

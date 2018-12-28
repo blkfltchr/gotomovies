@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const NavBar = () => {
+const Navigation = () => {
   return (
     <div className='navbar navbar-expand-sm navbar-light bg-white'>
       <Link to='/'>GoToRecipes</Link>
@@ -26,4 +26,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default Navigation
