@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { firestoreConnect } from 'react-redux-firebase'
 
 class AddRecipe extends Component {
   state = {
@@ -146,4 +145,4 @@ AddRecipe.propTypes = {
   history: PropTypes.object
 }
 
-export default firestoreConnect()(AddRecipe)
+export default AddRecipe

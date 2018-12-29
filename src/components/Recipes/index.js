@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
 import { Button } from 'reactstrap'
 import PropTypes from 'prop-types'
 
@@ -49,9 +46,4 @@ Recipes.propTypes = {
   recipes: PropTypes.array
 }
 
-export default compose(
-  firestoreConnect([{ collection: 'recipes' }]),
-  connect((state, props) => ({
-    recipes: state.firestore.ordered.recipes
-  }))
-)(Recipes)
+export default Recipes
