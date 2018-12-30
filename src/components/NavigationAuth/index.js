@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import SignOut from '../SignOut'
+
 import * as ROUTES from '../../constants/routes'
 
 const {
@@ -39,7 +41,7 @@ const NavigationAuth = () => (
       </ul>
       <ul className='nav navbar-nav navbar-right'>
         <li>
-          <Link to='/signup'>Sign Up</Link>
+          <SignOut />
         </li>
       </ul>
     </div>
