@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { compose } from 'recompose'
 import { withAuthentication } from '../Session'
 
 import Navigation from '../Navigation'
@@ -11,6 +10,7 @@ import SingleRecipe from '../SingleRecipe'
 import AddRecipe from '../AddRecipe'
 import SignUp from '../SignUp'
 import LogIn from '../LogIn'
+import PasswordForget from '../PasswordForget'
 
 import * as ROUTES from '../../constants/routes'
 
@@ -21,7 +21,8 @@ const {
   SINGLE_RECIPE,
   SEARCH,
   SIGNUP,
-  LOGIN
+  LOGIN,
+  PASSWORD_FORGET
 } = ROUTES
 
 class App extends Component {
@@ -37,10 +38,11 @@ class App extends Component {
           <Route exact path={SEARCH} component={Search} />
           <Route exact path={SIGNUP} component={SignUp} />
           <Route exact path={LOGIN} component={LogIn} />
+          <Route exact path={PASSWORD_FORGET} component={PasswordForget} />
         </Switch>
       </div>
     )
   }
 }
 
-export default compose(withAuthentication)(App)
+export default withAuthentication(App)
