@@ -7,6 +7,7 @@ import * as ROUTES from '../../constants/routes'
 
 const {
   LANDING,
+  ACCOUNT,
   RECIPES,
   ADD_RECIPE,
   SEARCH
@@ -37,6 +38,9 @@ const NavigationAuth = () => (
         </li>
         <li>
           <Link to={SEARCH}>Search for Recipes</Link>
+        </li>
+        <li>
+          <Link to={ACCOUNT}>Account</Link>
         </li>
       </ul>
       <ul className='nav navbar-nav navbar-right'>

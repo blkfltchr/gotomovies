@@ -1,4 +1,5 @@
 export const LANDING = '/'
+export const ACCOUNT = '/account'
 export const RECIPES = '/recipes'
 export const ADD_RECIPE = '/recipes/add'
 export const SINGLE_RECIPE = '/recipes/:id'
