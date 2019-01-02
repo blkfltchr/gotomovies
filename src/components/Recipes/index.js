@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import PropTypes from 'prop-types'
+import { withAuthorization } from '../Session'
 
 import RecipeCard from '../RecipeCard'
 import AddRecipeCard from '../AddRecipeCard'
+
+const condition = authUser => !!authUser
 
 class Recipes extends Component {
   render () {
@@ -46,4 +49,4 @@ Recipes.propTypes = {
   recipes: PropTypes.array
 }
 
-export default Recipes
+export default withAuthorization(condition)(Recipes)
