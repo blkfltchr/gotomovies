@@ -4,7 +4,7 @@ import NavBar from './components/Home/NavBar'
 import Home from './components/Home/Home'
 import Recipes from './components/Recipe/Recipes'
 import Search from './components/Search/Search'
-import SingleRecipe from './components/Recipe/SingleRecipe'
+import RecipePage from './components/Recipe/RecipePage'
 import AddRecipe from './components/Recipe/AddRecipe'
 import { Provider } from 'react-redux'
 import store from './store'
@@ -21,7 +21,7 @@ class App extends Component {
               <Route exact path='/recipes' component={Recipes} />
               <Route exact path='/search' component={Search} />
               <Route exact path='/recipes/add' component={AddRecipe} />
-              <Route exact path='/recipes/healthy-egg' component={SingleRecipe} />
+              <Route exact path='/recipes/:id' component={RecipePage} />
             </Switch>
           </div>
         </Router>
