@@ -2,6 +2,11 @@ import React from 'react'
 import AuthUserContext from './context'
 import { withFirebase } from '../Firebase'
 
+/*
+A higher-order component that extracts the session
+handling for the authenticated user.
+*/
+
 const withAuthentication = Component => {
   class withAuthentication extends React.Component {
     constructor (props) {

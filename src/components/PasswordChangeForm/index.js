@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withFirebase } from '../Firebase'
 
 const INITIAL_STATE = {
   passwordOne: '',
-  passwordTwo: ''
+  passwordTwo: '',
+  error: null
 }
 
 class PasswordChangeForm extends Component {
@@ -23,6 +25,8 @@ class PasswordChangeForm extends Component {
     event.preventDefault()
 
     const { passwordOne } = this.state
+
+    /* Using the Firbase API to enable a user to change their password */
 
     this.props.firebase
       .doPasswordUpdate(passwordOne)
@@ -64,6 +68,12 @@ class PasswordChangeForm extends Component {
       </form>
     )
   }
+}
+
+PasswordChangeForm.propTypes = {
+  firebase: PropTypes.shape({
+    doPasswordUpdate: PropTypes.func
+  })
 }
 
 export default withFirebase(PasswordChangeForm)

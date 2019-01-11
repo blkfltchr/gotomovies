@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withFirebase } from '../Firebase'
 
 const INITIAL_STATE = {
@@ -57,6 +58,12 @@ class PasswordForgetForm extends Component {
       </form>
     )
   }
+}
+
+PasswordForgetForm.propTypes = {
+  firebase: PropTypes.shape({
+    doPasswordReset: PropTypes.func
+  })
 }
 
 export default withFirebase(PasswordForgetForm)

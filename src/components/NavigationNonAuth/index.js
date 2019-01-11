@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+/* Route strings imported */
+
 import * as ROUTES from '../../constants/routes'
 
 const {
@@ -23,7 +25,11 @@ const NavigationNonAuth = () => (
         <span className='icon-bar' />
         <span className='icon-bar' />
       </button>
-      <Link className='navbar-brand' to={LANDING}>Go To Recipes</Link>
+      <Link
+        className='navbar-brand'
+        to={LANDING}>
+        Go To Recipes
+      </Link>
     </div>
     <div id='navbarCollapse' className='collapse navbar-collapse'>
       <ul className='nav navbar-nav'>

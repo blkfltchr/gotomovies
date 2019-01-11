@@ -3,15 +3,16 @@ import { Card, CardBody, CardTitle, CardImg } from 'reactstrap'
 import PropTypes from 'prop-types'
 
 const RecipeCard = (props) => {
+  const { title, image } = props.recipe
   return (
     <Card>
       <CardBody>
-        <CardTitle>{props.recipe.title}</CardTitle>
+        <CardTitle>{title}</CardTitle>
         <CardImg
           style={{ height: '216px', width: '216px' }}
           top width='100%'
-          src={props.recipe.image}
-          alt={props.recipe.title} />
+          src={image}
+          alt={title} />
       </CardBody>
     </Card>
   )

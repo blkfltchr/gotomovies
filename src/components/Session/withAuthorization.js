@@ -4,6 +4,8 @@ import { withFirebase } from '../Firebase'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 
+/* Route strings imported */
+
 import * as ROUTES from '../../constants/routes'
 
 const { LANDING } = ROUTES
@@ -28,7 +30,7 @@ const withAuthorization = condition => Component => {
       return (
         <AuthUserContext.Consumer>
           {authUser =>
-            condition(authUser) ? <Component {...this.props} /> : null
+            condition(authUser) ? <Component {...this.props} userId={authUser.uid} /> : null
           }
         </AuthUserContext.Consumer>
       )

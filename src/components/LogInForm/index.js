@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { withFirebase } from '../Firebase'
+
+/* recompose is used to organize your higher-order components */
+
 import { compose } from 'recompose'
+
+/* Route strings imported */
 
 import * as ROUTES from '../../constants/routes'
 
-const {
-  LANDING
-} = ROUTES
+const { LANDING } = ROUTES
 
 const INITIAL_STATE = {
   email: '',
@@ -32,6 +36,8 @@ class LogInForm extends Component {
     event.preventDefault()
 
     const { email, password } = this.state
+
+    /* Using the Firbase API to enable a user to sign in */
 
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
@@ -74,6 +80,15 @@ class LogInForm extends Component {
       </form>
     )
   }
+}
+
+LogInForm.propTypes = {
+  firebase: PropTypes.shape({
+    doSignInWithEmailAndPassword: PropTypes.func
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
 }
 
 export default compose(
