@@ -17,7 +17,6 @@ const JumboTron = () => {
           </Button>
         </p>
       </div>
-      {/* <Button tag={Link} to='/about' className='about'>How I built this</Button> */}
     </div>
   )
 }

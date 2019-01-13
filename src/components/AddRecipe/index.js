@@ -1,32 +1,64 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { firestoreConnect } from 'react-redux-firebase'
+import { withAuthorization } from '../Session'
+
+const condition = authUser => !!authUser
+
+const INITIAL_STATE = {
+  title: '',
+  description: '',
+  image: '',
+  ingredients: [],
+  instructions: '',
+  meal: '',
+  preptime: ''
+}
 
 class AddRecipe extends Component {
-  state = {
-    title: '',
-    description: '',
-    image: '',
-    ingredients: [],
-    instructions: '',
-    meal: '',
-    preptime: ''
+  constructor (props) {
+    super(props)
+
+    this.state = { ...INITIAL_STATE }
   }
 
-  onSubmit = e => {
-    e.preventDefault()
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
-    const newRecipe = this.state
+  onSubmit = event => {
+    event.preventDefault()
 
-    const { firestore } = this.props
+    let newRecipe = [{
+      id: Date.now(),
+      ...this.state
+    }]
 
-    firestore
-      .add({ collection: 'recipes' }, newRecipe)
-      .then(() => this.props.history.push('/recipes'))
-  };
+    const userId = this.props.userId
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value })
+    this.props.firebase
+      .recipes(userId)
+      .once('value', snapshot => {
+        const RECIPES_VAL = snapshot.val()
+
+        if (RECIPES_VAL) {
+          RECIPES_VAL.push({
+            id: Date.now(),
+            ...this.state
+          })
+          newRecipe = RECIPES_VAL
+        }
+
+        this.props.firebase
+          .recipes(userId)
+          .set({ ...newRecipe })
+          .then(() => {
+            this.setState({ ...INITIAL_STATE })
+          })
+      })
+  }
 
   render () {
     return (
@@ -142,8 +174,10 @@ class AddRecipe extends Component {
 }
 
 AddRecipe.propTypes = {
-  firestore: PropTypes.object.isRequired,
-  history: PropTypes.object
+  firebase: PropTypes.shape({
+    recipes: PropTypes.func
+  }),
+  userId: PropTypes.string
 }
 
-export default firestoreConnect()(AddRecipe)
+export default withAuthorization(condition)(AddRecipe)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import RecipeCard from '../Recipe/RecipeCard'
+import RecipeCard from '../RecipeCard'
 import axios from 'axios'
 import { Form, Input, Button } from 'reactstrap'
 const apiId = process.env.REACT_APP_API_ID
