@@ -27,8 +27,6 @@ class SingleRecipe extends Component {
     const userId = this.props.userId
     const recipeId = this.props.match.params.id
 
-    console.log('This props', typeof this.props.match.params.id)
-
     this.props.firebase
       .recipes(userId)
       .once('value', snapshot => {

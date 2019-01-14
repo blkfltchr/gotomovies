@@ -1,0 +1,33 @@
+.browse-meals {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .meal-buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .meal-button {
+    margin: 0 10px 10px 10px;
+    width: 100px
+  }
+
+  .center {
+    margin: 0 auto;
+  }
+
+  .meal-button:active:focus {
+    background-color: aqua;
+  }
+
+  .recipe-list {
+    display: flex;
+    min-height: 95vh;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 80vw;
+    justify-content: center;
+  }

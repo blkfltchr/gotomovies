@@ -7,6 +7,8 @@ import { withAuthorization } from '../Session'
 import RecipeCard from '../RecipeCard'
 import AddRecipeCard from '../AddRecipeCard'
 
+import './index.css'
+
 const condition = authUser => !!authUser
 
 class Recipes extends Component {
@@ -54,12 +56,14 @@ class Recipes extends Component {
     return (
       <div>
         <p className='browse-meals'>Browse recipes by meal</p>
+
         <div className='meal-buttons'>
           <Button className='meal-button'>All</Button>
           <Button className='meal-button'>Breakfast</Button>
           <Button className='meal-button'>Lunch</Button>
           <Button className='meal-button'>Dinner</Button>
         </div>
+
         <div className='center'>
           <div className='recipe-list'>
             {recipes.map(recipe => (

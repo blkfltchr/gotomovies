@@ -1,0 +1,12 @@
+.jumbo-background {
+    background-image: url(../../assets/dark-wood-and-vegetables.jpg);
+    background-size: cover;
+    height: 90vh;
+  }
+
+  .jumbo-text {
+    text-align: right;
+    margin-right: 10%;
+    color: white;
+    padding-top: 20%;
+  }

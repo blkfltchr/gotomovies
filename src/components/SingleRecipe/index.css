@@ -6,3 +6,44 @@
   margin-right: '-50%';
   transform: 'translate(-50%, -50%)' 
 }
+
+.recipe-card {
+  border: 1px solid #d8d8d8;
+  width: 65vw;
+  margin: 0.7rem auto;
+  padding: 15px 15px 0 15px;
+  background-color: white
+}
+
+.flex-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.recipe-image {
+  height: 256px;
+  width: 256px;
+  margin: 0 10px 10px 0;
+}
+
+.delete-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+i {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+@media (max-width: 720px) {
+  .recipe-image {
+    display: none;
+  }
+}
+
+@media (max-width: 965px) {
+  .recipe-card {
+    width: 80vw;
+  }
+}
