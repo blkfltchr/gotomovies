@@ -32,7 +32,7 @@ class AddRecipe extends Component {
     event.preventDefault()
 
     let newRecipe = [{
-      id: Date.now(),
+      id: String(Date.now()),
       ...this.state
     }]
 
@@ -45,7 +45,7 @@ class AddRecipe extends Component {
 
         if (RECIPES_VAL) {
           RECIPES_VAL.push({
-            id: Date.now(),
+            id: String(Date.now()),
             ...this.state
           })
           newRecipe = RECIPES_VAL
