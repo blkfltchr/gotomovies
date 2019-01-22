@@ -98,6 +98,10 @@ class Firebase {
   /* User Recipes API */
 
   userRecipes = uid => this.db.ref(`/users/${uid}/recipes`)
+
+  /* Global Recipes API */
+
+  recipes = () => this.db.ref('/recipes')
 }
 
 export default Firebase
