@@ -1,131 +1,149 @@
 import React, { Component } from 'react'
-import '../../App.css'
-import { Alert, Button } from 'reactstrap'
-import axios from 'axios'
-import { Redirect, Link } from 'react-router-dom'
-import Modal from 'react-modal'
+import PropTypes from 'prop-types'
+import { withAuthorization } from '../Session'
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
+import './index.css'
+
+const condition = authUser => !!authUser
+
+const INITIAL_STATE = {
+  loading: true,
+  title: '',
+  description: '',
+  image: '',
+  ingredients: [],
+  instructions: '',
+  meal: '',
+  preptime: ''
 }
 
 class SingleRecipe extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      deleted: false,
-      modalIsOpen: false
-    }
-  }
-
-  openModal =() => {
-    this.setState({ modalIsOpen: true })
-  }
-
-  afterOpenModal =() => {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#00'
-  }
-
-  closeModal =() => {
-    this.setState({ modalIsOpen: false })
+    this.state = { ...INITIAL_STATE }
   }
 
   componentDidMount () {
-    // id is undefined so I commented the code below
-    // const id = this.props.match.params.id
-    // axios
-    //   .get(`http://localhost:5555/recipes/${id}`)
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-  }
+    const userId = this.props.userId
+    const recipeId = this.props.match.params.id
 
-  deleteRecipe = () => {
-    axios
-      .delete(`http://localhost:5555/recipes/${this.state.recipe.id}`)
-      .then(response => {
-        console.log('Deleting!', response)
-        this.setState({ deleted: true })
+    this.props.firebase
+      .recipes(userId)
+      .once('value', snapshot => {
+        const singleRecipe = snapshot.val()
+          .filter(recipe => recipe.id === recipeId)[0]
+
+        const {
+          description,
+          image,
+          ingredients,
+          instructions,
+          meal,
+          preptime,
+          title
+        } = singleRecipe
+
+        this.setState({
+          description,
+          image,
+          ingredients,
+          instructions,
+          meal,
+          preptime,
+          title,
+          loading: false
+        })
       })
-      .catch(error => console.log(error))
   }
 
   render () {
-    return this.state.deleted ? (
-      <Redirect to='/recipes' />
-    ) : (
-      <div>
-        <div className='recipe-card'>
-          <div className='flex-wrapper'>
-            <div>
-              <img
-                src='https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg'
-                alt='Healthy eggs'
-                className='recipe-image'
-              />
-            </div>
-            <div>
-              <div className='delete-flex'>
-                <h3>Healthy eggs</h3>
-                <div>
-                  <i className='far fa-edit fa-2x' />
-                  <i
-                    className='far fa-trash-alt fa-2x delete-icon'
-                    onClick={this.openModal} />
-                </div>
+    const {
+      loading,
+      title,
+      description,
+      image,
+      ingredients,
+      instructions,
+      meal,
+      preptime
+    } = this.state
+
+    if (loading) {
+      return <h1>Loading...</h1>
+    }
+
+    return (
+      <div className='recipe-card'>
+        <div className='flex-wrapper'>
+          <img src={image} alt={title} className='recipe-image' />
+        </div>
+
+        <div className='delete-flex'>
+          <h3>{title}</h3>
+          <div>
+            <i className='far fa-edit fa-2x' />
+            <i className='far fa-trash-alt fa-2x delete-icon' />
+          </div>
+        </div>
+
+        <div>
+          <h5 className='recipe-description'>{description}</h5>
+          <h5 className='recipe-instructions'>{instructions}</h5>
+          {ingredients.map((index, ingredient) =>
+            <h5 key={index} className='recipe-ingredients'>{ingredient}</h5>
+          )}
+          <h5 className='recipe-preptime'>{preptime}</h5>
+          <h5 className='recipe-meail'>{meal}</h5>
+        </div>
+
+        <div className='modal fade'>
+          <div className='modal-dialog'>
+            <div className='modal-content'>
+              <div className='modal-header'>
+                <button
+                  type='button'
+                  className='close'
+                  data-dismiss='modal'
+                  aria-hidden='true'>
+                  &times;
+                </button>
+                <h4 className='modal-title'>Confirm Delete</h4>
               </div>
-              <div>
-                <p className='recipe-description'>Fried eggs with beans and spinach, topped with salsa and hot sauce</p>
-                <h5>Instructions</h5>
-                <p className='recipe-instructions'>Add oil and spinach to a frying pan. Once the spinach has started shrivelling up, break your desired number of eggs into the frying pan. Soon after, add beans. Once cooked, top with salsa and hot sauce.</p>
-                <h5>Ingredients</h5>
-                <p className='recipe-ingredients'>eggs, black beans, spinach, salsa, hot sauce</p>
-                <h5>Preptime</h5>
-                <p className='recipe-preptime'>15 minutes</p>
+              <div className='modal-body'>
+                <p>Are you sure you want to delete?</p>
+              </div>
+              <div className='modal-footer'>
+                <button
+                  type='button'
+                  className='btn btn-default'
+                  data-dismiss='modal'>
+                  Yes
+                </button>
+                <button
+                  type='button'
+                  className='btn btn-primary'
+                  data-dismiss='modal'>
+                  No
+                </button>
               </div>
             </div>
           </div>
-          <Alert color='info'>
-            This meal is intended for <strong>breakfast</strong> but
-            rules are meant to be broken.
-          </Alert>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel='Example Modal'
-          >
-            <div>
-              <h4 ref={subtitle => (this.subtitle = subtitle)}>
-                Are you sure you want to delete the <br /> Healthy eggs?
-              </h4>
-              <div className='modal-buttons'>
-                <Button color='danger' onClick={this.deleteRecipe} className='margin-right'>
-                  Yes, delete this recipe.
-                </Button>
-                <Button onClick={this.closeModal}>No, keep it.</Button>
-              </div>
-            </div>
-          </Modal>
         </div>
-        <Link to='/recipes'>
-          <div className='searchbar'>View all the recipes...</div>
-        </Link>
       </div>
     )
   }
 }
 
-export default SingleRecipe
+SingleRecipe.propTypes = {
+  userId: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }),
+  firebase: PropTypes.shape({
+    recipes: PropTypes.func
+  })
+}
+
+export default withAuthorization(condition)(SingleRecipe)

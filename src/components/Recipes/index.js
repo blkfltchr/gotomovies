@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from 'reactstrap'
 import PropTypes from 'prop-types'
 import { withAuthorization } from '../Session'
 
 import RecipeCard from '../RecipeCard'
 import AddRecipeCard from '../AddRecipeCard'
+
+import './index.css'
 
 const condition = authUser => !!authUser
 
@@ -54,12 +55,14 @@ class Recipes extends Component {
     return (
       <div>
         <p className='browse-meals'>Browse recipes by meal</p>
+
         <div className='meal-buttons'>
-          <Button className='meal-button'>All</Button>
-          <Button className='meal-button'>Breakfast</Button>
-          <Button className='meal-button'>Lunch</Button>
-          <Button className='meal-button'>Dinner</Button>
+          <button className='btn btn-primary'>All</button>
+          <button className='btn btn-primary'>Breakfast</button>
+          <button className='btn btn-primary'>Lunch</button>
+          <button className='btn btn-primary'>Dinner</button>
         </div>
+
         <div className='center'>
           <div className='recipe-list'>
             {recipes.map(recipe => (
