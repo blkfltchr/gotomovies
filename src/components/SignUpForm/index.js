@@ -89,40 +89,40 @@ class SignUpForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          name='name'
-          value={name}
-          onChange={this.onChange}
-          type='text'
-          placeholder='Full Name'
-        />
-        <input
-          name='email'
-          value={email}
-          onChange={this.onChange}
-          type='text'
-          placeholder='Email'
-        />
-        <input
-          name='passwordOne'
-          value={passwordOne}
-          onChange={this.onChange}
-          type='password'
-          placeholder='Password'
-        />
-        <input
-          name='passwordTwo'
-          value={passwordTwo}
-          onChange={this.onChange}
-          type='password'
-          placeholder='Confirm Password'
-        />
-        <button
-          disabled={isInvalid}
-          type='submit'>
-          Sign Up
-        </button>
-        {error && <p>{error.message}</p>}
+        <div className='form-group'>
+          <input
+            name='email'
+            value={email}
+            onChange={this.onChange}
+            type='email'
+            className='form-control'
+            placeholder='Email Address'
+          />
+        </div>
+        <div className='form-row'>
+          <div className='col'>
+            <input
+              name='passwordOne'
+              value={passwordOne}
+              onChange={this.onChange}
+              type='password'
+              className='form-control'
+              placeholder='Password'
+            />
+          </div>
+          <div className='col'>
+            <input
+              name='passwordTwo'
+              value={passwordTwo}
+              onChange={this.onChange}
+              type='password'
+              className='form-control'
+              placeholder='Confirm Password'
+            />
+          </div>
+        </div>
+        <button disabled={isInvalid} type='submit' className='btn btn-primary my-3'>Sign Up</button>
+        {error && <p className='text-danger'>{error.message}</p>}
       </form>
     )
   }

@@ -5,8 +5,8 @@ import PasswordForgetLink from '../PasswordForgetLink'
 import SignUpLink from '../SignUpLink'
 
 const LogIn = () => (
-  <div>
-    <h1>Sign In</h1>
+  <div className='container mt-2'>
+    <h1>Log In</h1>
     <LogInForm />
     <PasswordForgetLink />
     <SignUpLink />
