@@ -56,6 +56,7 @@ class AddRecipe extends Component {
           .set({ ...newRecipe })
           .then(() => {
             this.setState({ ...INITIAL_STATE })
+            this.props.history.push('/recipes')
           })
       })
   }
@@ -177,7 +178,10 @@ AddRecipe.propTypes = {
   firebase: PropTypes.shape({
     recipes: PropTypes.func
   }),
-  userId: PropTypes.string
+  userId: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
 }
 
 export default withAuthorization(condition)(AddRecipe)

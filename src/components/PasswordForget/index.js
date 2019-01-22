@@ -3,8 +3,8 @@ import React from 'react'
 import PasswordForgetForm from '../PasswordForgetForm'
 
 const PasswordForget = () => (
-  <div>
-    <h1>Password Forget</h1>
+  <div className='container mt-2'>
+    <h1>Forgot your password?</h1>
     <PasswordForgetForm />
   </div>
 )
