@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from 'reactstrap'
 import PropTypes from 'prop-types'
 import { withAuthorization } from '../Session'
 
@@ -58,10 +57,10 @@ class Recipes extends Component {
         <p className='browse-meals'>Browse recipes by meal</p>
 
         <div className='meal-buttons'>
-          <Button className='meal-button'>All</Button>
-          <Button className='meal-button'>Breakfast</Button>
-          <Button className='meal-button'>Lunch</Button>
-          <Button className='meal-button'>Dinner</Button>
+          <button className='meal-button'>All</button>
+          <button className='meal-button'>Breakfast</button>
+          <button className='meal-button'>Lunch</button>
+          <button className='meal-button'>Dinner</button>
         </div>
 
         <div className='center'>
