@@ -11,7 +11,7 @@ import { compose } from 'recompose'
 
 import * as ROUTES from '../../constants/routes'
 
-const { LANDING } = ROUTES
+const { RECIPES } = ROUTES
 
 const INITIAL_STATE = {
   email: '',
@@ -32,7 +32,7 @@ class LogInForm extends Component {
     })
   }
 
-  onSumbit = event => {
+  onSubmit = event => {
     event.preventDefault()
 
     const { email, password } = this.state
@@ -43,7 +43,7 @@ class LogInForm extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE })
-        this.props.history.push(LANDING)
+        this.props.history.push(RECIPES)
       })
       .catch(error => {
         this.setState({ error })
