@@ -57,10 +57,10 @@ class Recipes extends Component {
         <p className='browse-meals'>Browse recipes by meal</p>
 
         <div className='meal-buttons'>
-          <button className='meal-button'>All</button>
-          <button className='meal-button'>Breakfast</button>
-          <button className='meal-button'>Lunch</button>
-          <button className='meal-button'>Dinner</button>
+          <button className='btn btn-primary'>All</button>
+          <button className='btn btn-primary'>Breakfast</button>
+          <button className='btn btn-primary'>Lunch</button>
+          <button className='btn btn-primary'>Dinner</button>
         </div>
 
         <div className='center'>
