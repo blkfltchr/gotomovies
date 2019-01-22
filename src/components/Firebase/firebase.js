@@ -93,11 +93,11 @@ class Firebase {
   Firebase's realtime database API.
   */
 
-  user = uid => this.db.ref(`/${uid}`)
+  user = uid => this.db.ref(`/users/${uid}`)
 
-  /* Recipes API */
+  /* User Recipes API */
 
-  recipes = uid => this.db.ref(`/${uid}/recipes`)
+  userRecipes = uid => this.db.ref(`/users/${uid}/recipes`)
 }
 
 export default Firebase
