@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
+
+import './index.css'
 
 const JumboTron = () => {
   return (
@@ -10,11 +11,11 @@ const JumboTron = () => {
         <p className='lead'>No more forgetting, no more searching, no more indecision.</p>
         <p className='lead'>My go-to recipes helps you cook great meals for breakfast, lunch, and dinner.</p>
         <p className='lead'>
-          <Button
-            tag={Link}
+          <Link
             to='/recipes'
-            color='primary'>Browse recipes
-          </Button>
+            color='primary'>
+            Browse recipes
+          </Link>
         </p>
       </div>
     </div>
