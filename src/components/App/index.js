@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../App.css'
 import { Switch, Route } from 'react-router-dom'
 import { withAuthentication } from '../Session'
 
@@ -31,7 +32,7 @@ const {
 
 const App = () => {
   return (
-    <div className='App'>
+    <div className='App' >
       <Navigation />
       <Switch>
         <Route exact path={LANDING} component={Landing} />
