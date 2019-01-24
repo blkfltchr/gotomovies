@@ -31,33 +31,68 @@ class AddRecipe extends Component {
   onSubmit = event => {
     event.preventDefault()
 
+    const id = String(Date.now())
+
     let newRecipe = [{
-      id: String(Date.now()),
+      id: id,
       ...this.state
     }]
 
-    const userId = this.props.userId
+    const USER_ID = this.props.userId
 
     this.props.firebase
-      .recipes(userId)
+      .userRecipes(USER_ID)
       .once('value', snapshot => {
-        const RECIPES_VAL = snapshot.val()
+        const USER_RECIPES = snapshot.val()
 
-        if (RECIPES_VAL) {
-          RECIPES_VAL.push({
-            id: String(Date.now()),
+        if (USER_RECIPES) {
+          USER_RECIPES.push({
+            id: id,
             ...this.state
           })
-          newRecipe = RECIPES_VAL
+          newRecipe = USER_RECIPES
         }
 
         this.props.firebase
-          .recipes(userId)
+          .userRecipes(USER_ID)
           .set({ ...newRecipe })
           .then(() => {
-            this.setState({ ...INITIAL_STATE })
+            newRecipe = [{
+              id: id,
+              userId: USER_ID,
+              ...this.state
+            }]
+
+            this.props.firebase
+              .recipes()
+              .once('value', snapshot => {
+                const RECIPES = snapshot.val()
+
+                if (RECIPES) {
+                  RECIPES.push({
+                    id: id,
+                    userId: USER_ID,
+                    ...this.state
+                  })
+                  newRecipe = RECIPES
+                }
+
+                this.props.firebase
+                  .recipes()
+                  .set({ ...newRecipe })
+                  .then(() => {
+                    this.setState({ ...INITIAL_STATE })
+                    this.props.history.push('/recipes')
+                  })
+              })
           })
       })
+  }
+
+  componentWillUnmount () {
+    this.props.firebase
+      .userRecipes()
+      .off()
   }
 
   render () {
@@ -174,10 +209,14 @@ class AddRecipe extends Component {
 }
 
 AddRecipe.propTypes = {
+  userId: PropTypes.string,
   firebase: PropTypes.shape({
+    userRecipes: PropTypes.func,
     recipes: PropTypes.func
   }),
-  userId: PropTypes.string
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
 }
 
 export default withAuthorization(condition)(AddRecipe)

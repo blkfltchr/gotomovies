@@ -24,22 +24,21 @@ class Recipes extends Component {
     const userId = this.props.userId
 
     this.props.firebase
-      .recipes(userId)
+      .userRecipes(userId)
       .on('value', snapshot => {
-        const recipes = snapshot.val()
-
-        if (recipes) {
-          this.setState({
-            recipes,
-            noRecipes: false })
+        if (snapshot.val()) {
+          this.setState({ recipes: snapshot.val() })
         } else {
           this.setState({ noRecipes: true })
         }
       })
   }
+
   componentWillUnmount () {
+    const userId = this.props.userId
+
     this.props.firebase
-      .recipes()
+      .userRecipes(userId)
       .off()
   }
 
@@ -81,7 +80,7 @@ class Recipes extends Component {
 Recipes.propTypes = {
   userId: PropTypes.string,
   firebase: PropTypes.shape({
-    recipes: PropTypes.func
+    userRecipes: PropTypes.func
   })
 }
 

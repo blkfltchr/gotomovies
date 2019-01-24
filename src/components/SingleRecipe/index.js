@@ -28,7 +28,7 @@ class SingleRecipe extends Component {
     const recipeId = this.props.match.params.id
 
     this.props.firebase
-      .recipes(userId)
+      .userRecipes(userId)
       .once('value', snapshot => {
         const singleRecipe = snapshot.val()
           .filter(recipe => recipe.id === recipeId)[0]
@@ -142,7 +142,7 @@ SingleRecipe.propTypes = {
     })
   }),
   firebase: PropTypes.shape({
-    recipes: PropTypes.func
+    userRecipes: PropTypes.func
   })
 }
 
