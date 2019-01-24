@@ -85,13 +85,13 @@ class Firebase {
     return this.auth.currentUser.updatePassword(password)
   }
 
-  /* User API */
-
   /*
   The paths in the ref() method match the location
   where your entities (users) will be stored in
   Firebase's realtime database API.
   */
+
+  /* User API */
 
   user = uid => this.db.ref(`/users/${uid}`)
 
