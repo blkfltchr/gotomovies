@@ -7,14 +7,14 @@ import './index.css'
 const condition = authUser => !!authUser
 
 const INITIAL_STATE = {
-  loading: true,
   title: '',
   description: '',
   image: '',
   ingredients: [],
   instructions: '',
   meal: '',
-  preptime: ''
+  preptime: '',
+  loading: true
 }
 
 class SingleRecipe extends Component {
@@ -25,48 +25,44 @@ class SingleRecipe extends Component {
 
   componentDidMount () {
     const USER_ID = this.props.userId
-    const INDEX = 0
-
-    console.log('This props', this.props)
+    const RECIPE_ID = this.props.match.params.id
 
     this.props.firebase
-      .singleRecipe(USER_ID, INDEX)
+      .singleRecipe(USER_ID, RECIPE_ID)
       .once('value', snapshot => {
-        console.log('Snapshot', snapshot.val())
-       
-      //   const {
-      //     description,
-      //     image,
-      //     ingredients,
-      //     instructions,
-      //     meal,
-      //     preptime,
-      //     title
-      //   } = singleRecipe
+        const {
+          description,
+          image,
+          ingredients,
+          instructions,
+          meal,
+          preptime,
+          title
+        } = snapshot.val()
 
-      //   this.setState({
-      //     description,
-      //     image,
-      //     ingredients,
-      //     instructions,
-      //     meal,
-      //     preptime,
-      //     title,
-      //     loading: false
-      //   })
+        this.setState({
+          description,
+          image,
+          ingredients,
+          instructions,
+          meal,
+          preptime,
+          title,
+          loading: false
+        })
       })
   }
 
   render () {
     const {
-      loading,
       title,
       description,
       image,
       ingredients,
       instructions,
       meal,
-      preptime
+      preptime,
+      loading
     } = this.state
 
     if (loading) {
