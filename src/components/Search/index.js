@@ -1,13 +1,33 @@
 import React, { Component } from 'react'
 import RecipeCard from '../RecipeCard'
+import PropTypes from 'prop-types'
+import { withFirebase } from '../Firebase'
 
 class Search extends Component {
   constructor () {
     super()
     this.state = {
       recipes: [],
+      filteredRecipes: [],
       searchText: ''
     }
+  }
+
+  componentDidMount () {
+    this.props.firebase
+      .recipes()
+      .on('value', snapshot => {
+        const recipesObj = snapshot.val()
+        const recipesList = Object.keys(recipesObj)
+          .map(key => ({
+            ...recipesObj[key],
+            id: key
+          }))
+
+        this.setState({
+          recipes: recipesList
+        })
+      })
   }
 
   handleOnChange = event => {
@@ -16,28 +36,21 @@ class Search extends Component {
     })
   }
 
-  find = (event) => {
-    event.preventDefault()
-  }
-
   render () {
+    const { recipes, searchText } = this.state
+
     return (
       <div>
-        <form
-          onSubmit={this.find}
-          className='searchbar'>
-          <input
-            name='searchText'
-            type='text'
-            placeholder='Search'
-            value={this.state.searchText}
-            onChange={this.handleOnChange}
-          />
-          <button>Find</button>
-        </form>
+        <input
+          name='searchText'
+          type='text'
+          placeholder='Search'
+          value={searchText}
+          onChange={this.handleOnChange}
+        />
         <div className='recipe-list'>
-          {this.state.recipes.map((recipe, index) =>
-            <RecipeCard key={index} recipe={recipe.recipe} />
+          {recipes.map((recipe, index) =>
+            <RecipeCard key={index} recipe={recipe} />
           )}
         </div>
       </div>
@@ -45,4 +58,10 @@ class Search extends Component {
   }
 }
 
-export default Search
+Search.propTypes = {
+  firebase: PropTypes.shape({
+    recipes: PropTypes.func
+  })
+}
+
+export default withFirebase(Search)
