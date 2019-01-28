@@ -58,7 +58,7 @@ class SingleRecipe extends Component {
       title,
       description,
       image,
-      // ingredients,
+      ingredients,
       instructions,
       meal,
       preptime,
@@ -87,9 +87,11 @@ class SingleRecipe extends Component {
         <div>
           <p>{description}</p>
           <p>{instructions}</p>
-          {/* {ingredients.map((index, ingredient) =>
-            <p key={index} className='recipe-ingredients'>{ingredient}</p>
-          )} */}
+          <p> Ingredients:{' '}
+            {ingredients.map((ingredient, index) =>
+              <span key={index} className='recispane-ingredients'>{ingredient}, </span>
+            )}
+          </p>
           <p>{preptime} minutes preptime</p>
           <p>{meal}</p>
         </div>
