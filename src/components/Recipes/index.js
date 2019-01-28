@@ -16,18 +16,30 @@ class Recipes extends Component {
 
     this.state = {
       recipes: [],
+      loading: true,
       noRecipes: false
     }
   }
 
   componentDidMount () {
-    const userId = this.props.userId
+    const USER_ID = this.props.userId
 
     this.props.firebase
-      .userRecipes(userId)
+      .userRecipes(USER_ID)
       .on('value', snapshot => {
-        if (snapshot.val()) {
-          this.setState({ recipes: snapshot.val() })
+        const userRecipesObj = snapshot.val()
+        if (userRecipesObj) {
+          const userRecipesList = Object.keys(userRecipesObj)
+            .map(key => ({
+              ...userRecipesObj[key],
+              id: key
+            }))
+
+          this.setState({
+            recipes: userRecipesList,
+            loading: false,
+            noRecipes: false
+          })
         } else {
           this.setState({ noRecipes: true })
         }
@@ -43,12 +55,16 @@ class Recipes extends Component {
   }
 
   render () {
-    const { recipes, noRecipes } = this.state
+    const {
+      recipes,
+      loading,
+      noRecipes
+    } = this.state
 
-    if (noRecipes) {
-      return <h1>You do not have any recipes.</h1>
-    } else if (!recipes.length) {
+    if (loading) {
       return <h1>Loading...</h1>
+    } else if (noRecipes) {
+      return <h1>You do not have any recipes.</h1>
     }
 
     return (
