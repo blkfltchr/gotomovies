@@ -18,7 +18,7 @@ const AddRecipeCard = () => {
       <Link
         to={'/recipes/add'}
         className='btn btn-primary btn-sm'>
-        <i className='fas fa-arrow-circle-right' /> Add a recipe
+        <i className='fas fa-plus' /> Add a recipe
       </Link>
     </div>
   )
