@@ -10,7 +10,7 @@ class Search extends Component {
       text: '',
       recipes: [],
       filteredRecipes: [],
-      noFilteredResults: '',
+      noFilteredResults: false,
       loading: true
     }
   }
