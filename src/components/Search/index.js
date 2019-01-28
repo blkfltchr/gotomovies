@@ -7,9 +7,11 @@ class Search extends Component {
   constructor () {
     super()
     this.state = {
+      text: '',
       recipes: [],
       filteredRecipes: [],
-      searchText: ''
+      noFilteredResults: '',
+      loading: true
     }
   }
 
@@ -18,26 +20,75 @@ class Search extends Component {
       .recipes()
       .on('value', snapshot => {
         const recipesObj = snapshot.val()
-        const recipesList = Object.keys(recipesObj)
-          .map(key => ({
-            ...recipesObj[key],
-            id: key
-          }))
 
-        this.setState({
-          recipes: recipesList
-        })
+        if (recipesObj) {
+          const recipesList = Object.keys(recipesObj)
+            .map(key => ({
+              ...recipesObj[key],
+              id: key
+            }))
+          
+          this.setState({
+            loading: false,
+            recipes: recipesList
+          })
+        } else {
+          this.setState({
+            loading: false
+          })
+        }
       })
   }
 
+  componentWillUnmount () {
+    this.props.firebase
+      .recipes()
+      .off()
+  }
+
   handleOnChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    const text = event.target.value
+    const { recipes } = this.state
+
+    if (text) {
+      const filteredRecipes = recipes.filter(recipe =>
+        recipe.title.toLowerCase().search(text.toLowerCase()) >= 0)
+
+      if (filteredRecipes.length) {
+        this.setState({
+          text,
+          filteredRecipes,
+          noFilteredResults: false
+        })
+      } else {
+        this.setState({
+          text,
+          noFilteredResults: true
+        })
+      }
+    } else {
+      this.setState({
+        text: '',
+        filteredRecipes: [],
+        noFilteredResults: false
+      })
+    }
   }
 
   render () {
-    const { recipes, searchText } = this.state
+    const {
+      text,
+      recipes,
+      filteredRecipes,
+      noFilteredResults,
+      loading
+    } = this.state
+
+    if (loading) {
+      return <h1>Loading...</h1>
+    } else if (!recipes.length) {
+      return <h1>There are no recipes in the database.</h1>
+    }
 
     return (
       <div>
@@ -45,14 +96,18 @@ class Search extends Component {
           name='searchText'
           type='text'
           placeholder='Search'
-          value={searchText}
+          value={text}
           onChange={this.handleOnChange}
         />
-        <div className='recipe-list'>
-          {recipes.map((recipe, index) =>
-            <RecipeCard key={index} recipe={recipe} />
-          )}
-        </div>
+        {noFilteredResults
+          ? <h1>No results found.</h1>
+          : <div className='recipe-list'>
+            {filteredRecipes.length
+              ? filteredRecipes.map((recipe, index) =>
+                <RecipeCard key={index} recipe={recipe} />)
+              : recipes.map((recipe, index) =>
+                <RecipeCard key={index} recipe={recipe} />)}
+          </div>}
       </div>
     )
   }
