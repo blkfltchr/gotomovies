@@ -41,7 +41,10 @@ class Recipes extends Component {
             noRecipes: false
           })
         } else {
-          this.setState({ noRecipes: true })
+          this.setState({
+            noRecipes: true,
+            loading: false
+          })
         }
       })
   }
