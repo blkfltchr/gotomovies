@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../App.css'
 import { Switch, Route } from 'react-router-dom'
 import { withAuthentication } from '../Session'
 
@@ -7,12 +6,14 @@ import Navigation from '../Navigation'
 import Landing from '../Landing'
 import Account from '../Account'
 import Recipes from '../Recipes'
-// import Search from '../Search'
+import Search from '../Search'
 import SingleRecipe from '../SingleRecipe'
 import AddRecipe from '../AddRecipe'
 import SignUp from '../SignUp'
 import LogIn from '../LogIn'
 import PasswordForget from '../PasswordForget'
+
+import './index.css'
 
 /* Route strings imported */
 
@@ -24,7 +25,7 @@ const {
   RECIPES,
   ADD_RECIPE,
   SINGLE_RECIPE,
-  // SEARCH,
+  SEARCH,
   SIGNUP,
   LOGIN,
   PASSWORD_FORGET
@@ -40,7 +41,7 @@ const App = () => {
         <Route exact path={SIGNUP} component={SignUp} />
         <Route exact path={LOGIN} component={LogIn} />
         <Route exact path={PASSWORD_FORGET} component={PasswordForget} />
-        {/* <Route exact path={SEARCH} component={Search} /> */}
+        <Route exact path={SEARCH} component={Search} />
         <Route exact path={RECIPES} component={Recipes} />
         <Route exact path={ADD_RECIPE} component={AddRecipe} />
         <Route exact path={SINGLE_RECIPE} component={SingleRecipe} />

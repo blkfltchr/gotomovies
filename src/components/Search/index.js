@@ -1,59 +1,67 @@
-// import React, { Component } from 'react'
-// import RecipeCard from '../RecipeCard'
-// import axios from 'axios'
-// import { Form, Input, Button } from 'reactstrap'
-// const apiId = process.env.REACT_APP_API_ID
-// const apiKey = process.env.REACT_APP_API_KEY
+import React, { Component } from 'react'
+import RecipeCard from '../RecipeCard'
+import PropTypes from 'prop-types'
+import { withFirebase } from '../Firebase'
 
-// class Search extends Component {
-//   constructor () {
-//     super()
-//     this.state = {
-//       recipes: [],
-//       searchText: ''
-//     }
-//   }
+class Search extends Component {
+  constructor () {
+    super()
+    this.state = {
+      recipes: [],
+      filteredRecipes: [],
+      searchText: ''
+    }
+  }
 
-//   handleOnChange = event => {
-//     this.setState({
-//       [event.target.name]: event.target.value
-//     })
-//   }
+  componentDidMount () {
+    this.props.firebase
+      .recipes()
+      .on('value', snapshot => {
+        const recipesObj = snapshot.val()
+        const recipesList = Object.keys(recipesObj)
+          .map(key => ({
+            ...recipesObj[key],
+            id: key
+          }))
 
-//   find = (event) => {
-//     event.preventDefault()
-//     axios.get(`https://api.edamam.com/search?q=${this.state.searchText}&app_id=${apiId}&app_key=${apiKey}`)
-//       .then(response => {
-//         this.setState({
-//           recipes: response.data.hits
-//         })
-//       })
-//       .catch(error => console.log('Error', error))
-//   }
+        this.setState({
+          recipes: recipesList
+        })
+      })
+  }
 
-//   render () {
-//     return (
-//       <div>
-//         <Form
-//           onSubmit={this.find}
-//           className='searchbar'>
-//           <Input
-//             name='searchText'
-//             type='text'
-//             placeholder='Search'
-//             value={this.state.searchText}
-//             onChange={this.handleOnChange}
-//           />
-//           <Button>Find</Button>
-//         </Form>
-//         <div className='recipe-list'>
-//           {this.state.recipes.map((recipe, index) =>
-//             <RecipeCard key={index} recipe={recipe.recipe} />
-//           )}
-//         </div>
-//       </div>
-//     )
-//   }
-// }
+  handleOnChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
-// export default Search
+  render () {
+    const { recipes, searchText } = this.state
+
+    return (
+      <div>
+        <input
+          name='searchText'
+          type='text'
+          placeholder='Search'
+          value={searchText}
+          onChange={this.handleOnChange}
+        />
+        <div className='recipe-list'>
+          {recipes.map((recipe, index) =>
+            <RecipeCard key={index} recipe={recipe} />
+          )}
+        </div>
+      </div>
+    )
+  }
+}
+
+Search.propTypes = {
+  firebase: PropTypes.shape({
+    recipes: PropTypes.func
+  })
+}
+
+export default withFirebase(Search)

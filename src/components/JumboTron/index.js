@@ -12,7 +12,7 @@ const JumboTron = () => {
         <p className='lead'>My go-to recipes helps you cook great meals for breakfast, lunch, and dinner.</p>
         <p className='lead'>
           <Link
-            to='/recipes'>
+            to='/search'>
             <button className='btn btn-primary'>
             Browse recipes
             </button>

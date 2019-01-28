@@ -85,19 +85,27 @@ class Firebase {
     return this.auth.currentUser.updatePassword(password)
   }
 
-  /* User API */
-
   /*
   The paths in the ref() method match the location
   where your entities (users) will be stored in
   Firebase's realtime database API.
   */
 
-  user = uid => this.db.ref(`/${uid}`)
+  /* User API */
 
-  /* Recipes API */
+  user = uid => this.db.ref(`/users/${uid}`)
 
-  recipes = uid => this.db.ref(`/${uid}/recipes`)
+  /* User Recipes API */
+
+  userRecipes = uid => this.db.ref(`/users/${uid}/recipes`)
+
+  /* Single Recipe API */
+
+  singleRecipe = (uid, rid) => this.db.ref(`/users/${uid}/recipes/${rid}`)
+
+  /* Global Recipes API */
+
+  recipes = () => this.db.ref('/recipes')
 }
 
 export default Firebase

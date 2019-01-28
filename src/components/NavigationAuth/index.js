@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 /* Route strings imported */
 
@@ -14,7 +15,7 @@ const {
 
 const NavigationAuth = () => (
   <div className='navbar navbar-expand-sm navbar-light bg-white'>
-    <a className='navbar-brand' href={LANDING}>GoToRecipes</a>
+    <Link className='navbar-brand' to={LANDING}>GoToRecipes</Link>
     <button
       className='navbar-toggler'
       type='button'
@@ -27,10 +28,27 @@ const NavigationAuth = () => (
     </button>
     <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
       <div className='navbar'>
-        <a className='nav-item' style={{ display: 'block', padding: '0.5rem' }} href={RECIPES}>My recipes</a>
-        <a className='nav-item' style={{ display: 'block', padding: '0.5rem' }} href={ADD_RECIPE}>Add a recipe</a>
-        <a className='nav-item' style={{ display: 'block', padding: '0.5rem' }} href={SEARCH}><i className='fas fa-search' /></a>
-        <a className='nav-item' style={{ display: 'block', padding: '0.5rem' }} href={ACCOUNT}><i className='fas fa-cog' /></a>
+        <Link className='nav-item'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={RECIPES}>
+          My recipes
+        </Link>
+        <Link className='nav-item'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={ADD_RECIPE}>
+          Add a recipe
+        </Link>
+        <Link className='nav-item'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={SEARCH}>
+          <i className='fas fa-search' />
+        </Link>
+        <Link
+          className='nav-item nav-link'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={ACCOUNT}>
+          <i className='fas fa-cog' />
+        </Link>
       </div>
     </div>
   </div>

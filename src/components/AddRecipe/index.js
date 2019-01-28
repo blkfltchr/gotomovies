@@ -31,32 +31,44 @@ class AddRecipe extends Component {
   onSubmit = event => {
     event.preventDefault()
 
-    let newRecipe = [{
-      id: String(Date.now()),
-      ...this.state
-    }]
+    const id = Date.now()
 
-    const userId = this.props.userId
+    const USER_ID = this.props.userId
+
+    let newRecipes = {}
+
+    newRecipes[id] = { ...this.state }
 
     this.props.firebase
-      .recipes(userId)
+      .userRecipes(USER_ID)
       .once('value', snapshot => {
-        const RECIPES_VAL = snapshot.val()
+        let userRecipes = snapshot.val()
 
-        if (RECIPES_VAL) {
-          RECIPES_VAL.push({
-            id: String(Date.now()),
-            ...this.state
-          })
-          newRecipe = RECIPES_VAL
+        if (userRecipes) {
+          newRecipes = Object.assign(newRecipes, userRecipes)
         }
 
         this.props.firebase
-          .recipes(userId)
-          .set({ ...newRecipe })
+          .userRecipes(USER_ID)
+          .set({ ...newRecipes })
           .then(() => {
-            this.setState({ ...INITIAL_STATE })
-            this.props.history.push('/recipes')
+            this.props.firebase
+              .recipes()
+              .once('value', snapshot => {
+                let recipes = snapshot.val()
+
+                if (recipes) {
+                  recipes = Object.assign(newRecipes, recipes)
+                }
+
+                this.props.firebase
+                  .recipes()
+                  .set({ ...newRecipes })
+                  .then(() => {
+                    this.setState({ ...INITIAL_STATE })
+                    this.props.history.push('/recipes')
+                  })
+              })
           })
       })
   }
@@ -175,10 +187,11 @@ class AddRecipe extends Component {
 }
 
 AddRecipe.propTypes = {
+  userId: PropTypes.string,
   firebase: PropTypes.shape({
+    userRecipes: PropTypes.func,
     recipes: PropTypes.func
   }),
-  userId: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func
   })

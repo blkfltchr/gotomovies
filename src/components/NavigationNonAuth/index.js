@@ -1,16 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 /* Route strings imported */
 
 import * as ROUTES from '../../constants/routes'
 
 const {
+  LANDING,
   LOGIN
 } = ROUTES
 
 const NavigationNonAuth = () => (
   <div className='navbar navbar-expand-sm navbar-light bg-white'>
-    <a className='navbar-brand' href='/'>GoToRecipes</a>
+    <Link className='navbar-brand' to={LANDING}>GoToRecipes</Link>
     <button
       className='navbar-toggler'
       type='button'
@@ -23,7 +25,7 @@ const NavigationNonAuth = () => (
     </button>
     <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
       <div className='navbar nav-pills'>
-        <a className='nav-item nav-link active' href={LOGIN}>Log In</a>
+        <Link className='nav-item nav-link active' to={LOGIN}>Log In</Link>
       </div>
     </div>
   </div>

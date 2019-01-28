@@ -7,14 +7,14 @@ import './index.css'
 const condition = authUser => !!authUser
 
 const INITIAL_STATE = {
-  loading: true,
   title: '',
   description: '',
   image: '',
   ingredients: [],
   instructions: '',
   meal: '',
-  preptime: ''
+  preptime: '',
+  loading: true
 }
 
 class SingleRecipe extends Component {
@@ -24,15 +24,12 @@ class SingleRecipe extends Component {
   }
 
   componentDidMount () {
-    const userId = this.props.userId
-    const recipeId = this.props.match.params.id
+    const USER_ID = this.props.userId
+    const RECIPE_ID = this.props.match.params.id
 
     this.props.firebase
-      .recipes(userId)
+      .singleRecipe(USER_ID, RECIPE_ID)
       .once('value', snapshot => {
-        const singleRecipe = snapshot.val()
-          .filter(recipe => recipe.id === recipeId)[0]
-
         const {
           description,
           image,
@@ -41,7 +38,7 @@ class SingleRecipe extends Component {
           meal,
           preptime,
           title
-        } = singleRecipe
+        } = snapshot.val()
 
         this.setState({
           description,
@@ -58,14 +55,14 @@ class SingleRecipe extends Component {
 
   render () {
     const {
-      loading,
       title,
       description,
       image,
       ingredients,
       instructions,
       meal,
-      preptime
+      preptime,
+      loading
     } = this.state
 
     if (loading) {
@@ -142,7 +139,7 @@ SingleRecipe.propTypes = {
     })
   }),
   firebase: PropTypes.shape({
-    recipes: PropTypes.func
+    singleRecipe: PropTypes.func
   })
 }
 
