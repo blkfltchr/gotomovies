@@ -33,7 +33,7 @@ const {
 
 const App = () => {
   return (
-    <div className='App'>
+    <div className='App' >
       <Navigation />
       <Switch>
         <Route exact path={LANDING} component={Landing} />
