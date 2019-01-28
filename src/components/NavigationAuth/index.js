@@ -27,13 +27,26 @@ const NavigationAuth = () => (
       <span className='navbar-toggler-icon' />
     </button>
     <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
-      <div className='navbar nav-pills'>
-        <Link className='nav-item nav-link' to={RECIPES}>My recipes</Link>
-        <Link className='nav-item nav-link' to={ADD_RECIPE}>Add a recipe</Link>
-        <Link className='nav-item nav-link' to={SEARCH}>
+      <div className='navbar'>
+        <Link className='nav-item'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={RECIPES}>
+          My recipes
+        </Link>
+        <Link className='nav-item'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={ADD_RECIPE}>
+          Add a recipe
+        </Link>
+        <Link className='nav-item'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={SEARCH}>
           <i className='fas fa-search' />
         </Link>
-        <Link className='nav-item nav-link' to={ACCOUNT}>
+        <Link
+          className='nav-item nav-link'
+          style={{ display: 'block', padding: '0.5rem' }}
+          to={ACCOUNT}>
           <i className='fas fa-cog' />
         </Link>
       </div>

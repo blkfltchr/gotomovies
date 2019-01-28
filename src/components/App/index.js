@@ -13,6 +13,8 @@ import SignUp from '../SignUp'
 import LogIn from '../LogIn'
 import PasswordForget from '../PasswordForget'
 
+import './index.css'
+
 /* Route strings imported */
 
 import * as ROUTES from '../../constants/routes'
