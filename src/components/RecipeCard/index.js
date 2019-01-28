@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const RecipeCard = (props) => {
-  const { title, image } = props.recipe
+  const { title, image, id } = props.recipe
   return (
     <div className='card' style={{
       width: '255px',
@@ -18,6 +19,12 @@ const RecipeCard = (props) => {
           src={image}
           alt={title} />
       </div>
+      <Link
+        style={{ textDecoration: 'none' }}
+        to={`/recipes/${id}`}
+        className='btn btn-primary btn-sm'>
+        View full recipe<i className='fas fa-arrow-right' />
+      </Link>
     </div>
   )
 }
