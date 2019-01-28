@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import RecipeCard from '../RecipeCard'
 import PropTypes from 'prop-types'
 import { withFirebase } from '../Firebase'
@@ -27,7 +28,7 @@ class Search extends Component {
               ...recipesObj[key],
               id: key
             }))
-          
+
           this.setState({
             loading: false,
             recipes: recipesList
@@ -104,9 +105,9 @@ class Search extends Component {
           : <div className='recipe-list'>
             {filteredRecipes.length
               ? filteredRecipes.map((recipe, index) =>
-                <RecipeCard key={index} recipe={recipe} />)
+                <Link to={`/recipes/${recipe.id}`}><RecipeCard key={index} recipe={recipe} /></Link>)
               : recipes.map((recipe, index) =>
-                <RecipeCard key={index} recipe={recipe} />)}
+                <Link to={`/recipes/${recipe.id}`}><RecipeCard key={index} recipe={recipe} /></Link>)}
           </div>}
       </div>
     )
