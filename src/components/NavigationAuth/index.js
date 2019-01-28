@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import SignOut from '../SignOut'
-
 /* Route strings imported */
 
 import * as ROUTES from '../../constants/routes'
@@ -16,46 +14,31 @@ const {
 } = ROUTES
 
 const NavigationAuth = () => (
-  <nav className='navbar navbar-default'>
-    <div className='navbar-header'>
-      <button
-        className='navbar-toggle'
-        type='button'
-        data-target='#navbarCollapse'
-        data-toggle='collapse'>
-        <span className='sr-only'>Toggle navigation</span>
-        <span className='icon-bar' />
-        <span className='icon-bar' />
-        <span className='icon-bar' />
-      </button>
-      <Link
-        className='navbar-brand'
-        to={LANDING}>
-        Go To Recipes
-      </Link>
+  <div className='navbar navbar-expand-sm navbar-light bg-white'>
+    <Link className='navbar-brand' to={LANDING}>GoToRecipes</Link>
+    <button
+      className='navbar-toggler'
+      type='button'
+      data-toggle='collapse'
+      data-target='#navbarNavAltMarkup'
+      aria-controls='navbarNavAltMarkup'
+      aria-expanded='false'
+      aria-label='Toggle navigation'>
+      <span className='navbar-toggler-icon' />
+    </button>
+    <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
+      <div className='navbar nav-pills'>
+        <Link className='nav-item nav-link' to={RECIPES}>My recipes</Link>
+        <Link className='nav-item nav-link' to={ADD_RECIPE}>Add a recipe</Link>
+        <Link className='nav-item nav-link' to={SEARCH}>
+          <i className='fas fa-search' />
+        </Link>
+        <Link className='nav-item nav-link' to={ACCOUNT}>
+          <i className='fas fa-cog' />
+        </Link>
+      </div>
     </div>
-    <div id='navbarCollapse' className='collapse navbar-collapse'>
-      <ul className='nav navbar-nav'>
-        <li className='active'>
-          <Link to={RECIPES}>My Recipes</Link>
-        </li>
-        <li>
-          <Link to={ADD_RECIPE}>Add a Recipe</Link>
-        </li>
-        <li>
-          <Link to={SEARCH}>Search for Recipes</Link>
-        </li>
-        <li>
-          <Link to={ACCOUNT}>Account</Link>
-        </li>
-      </ul>
-      <ul className='nav navbar-nav navbar-right'>
-        <li>
-          <SignOut />
-        </li>
-      </ul>
-    </div>
-  </nav>
+  </div>
 )
 
 export default NavigationAuth

@@ -24,35 +24,36 @@ class SingleRecipe extends Component {
   }
 
   componentDidMount () {
-    const userId = this.props.userId
-    const recipeId = this.props.match.params.id
+    const USER_ID = this.props.userId
+    const INDEX = 0
+
+    console.log('This props', this.props)
 
     this.props.firebase
-      .userRecipes(userId)
+      .singleRecipe(USER_ID, INDEX)
       .once('value', snapshot => {
-        const singleRecipe = snapshot.val()
-          .filter(recipe => recipe.id === recipeId)[0]
+        console.log('Snapshot', snapshot.val())
+       
+      //   const {
+      //     description,
+      //     image,
+      //     ingredients,
+      //     instructions,
+      //     meal,
+      //     preptime,
+      //     title
+      //   } = singleRecipe
 
-        const {
-          description,
-          image,
-          ingredients,
-          instructions,
-          meal,
-          preptime,
-          title
-        } = singleRecipe
-
-        this.setState({
-          description,
-          image,
-          ingredients,
-          instructions,
-          meal,
-          preptime,
-          title,
-          loading: false
-        })
+      //   this.setState({
+      //     description,
+      //     image,
+      //     ingredients,
+      //     instructions,
+      //     meal,
+      //     preptime,
+      //     title,
+      //     loading: false
+      //   })
       })
   }
 
@@ -142,7 +143,7 @@ SingleRecipe.propTypes = {
     })
   }),
   firebase: PropTypes.shape({
-    userRecipes: PropTypes.func
+    singleRecipe: PropTypes.func
   })
 }
 

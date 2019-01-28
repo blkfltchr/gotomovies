@@ -11,7 +11,7 @@ import { compose } from 'recompose'
 
 import * as ROUTES from '../../constants/routes'
 
-const { LANDING } = ROUTES
+const { RECIPES } = ROUTES
 
 const INITIAL_STATE = {
   email: '',
@@ -32,7 +32,7 @@ class LogInForm extends Component {
     })
   }
 
-  onSumbit = event => {
+  onSubmit = event => {
     event.preventDefault()
 
     const { email, password } = this.state
@@ -43,7 +43,7 @@ class LogInForm extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE })
-        this.props.history.push(LANDING)
+        this.props.history.push(RECIPES)
       })
       .catch(error => {
         this.setState({ error })
@@ -56,27 +56,29 @@ class LogInForm extends Component {
     const isInvalid = email === '' || password === ''
 
     return (
-      <form onSubmit={this.onSumbit}>
-        <input
-          name='email'
-          value={email}
-          onChange={this.onChange}
-          type='text'
-          placeholder='Email'
-        />
-        <input
-          name='password'
-          value={password}
-          onChange={this.onChange}
-          type='password'
-          placeholder='Password'
-        />
-        <button
-          disabled={isInvalid}
-          type='submit'>
-          Sign In
-        </button>
-        {error && <p>{error.message}</p>}
+      <form onSubmit={this.onSubmit}>
+        <div className='form-group'>
+          <input
+            name='email'
+            value={email}
+            onChange={this.onChange}
+            type='email'
+            className='form-control'
+            placeholder='Email Address'
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            name='password'
+            value={password}
+            onChange={this.onChange}
+            type='password'
+            className='form-control'
+            placeholder='Password'
+          />
+        </div>
+        <button disabled={isInvalid} type='submit' className='btn btn-primary mb-3'>Log In</button>
+        {error && <p className='text-danger'>{error.message}</p>}
       </form>
     )
   }

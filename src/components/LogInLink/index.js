@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 
 import * as ROUTES from '../../constants/routes'
 
-const { SIGNUP } = ROUTES
+const { LOGIN } = ROUTES
 
-const SignUpLink = () => (
+const LogInLink = () => (
   <p className='mt-2'>
-    Don't have an account? <Link to={SIGNUP}>Sign Up</Link>
+    Already have an account? <Link to={LOGIN}>Log In</Link>
   </p>
 )
 
-export default SignUpLink
+export default LogInLink

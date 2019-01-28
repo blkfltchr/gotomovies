@@ -99,6 +99,10 @@ class Firebase {
 
   userRecipes = uid => this.db.ref(`/users/${uid}/recipes`)
 
+  /* Single Recipe API */
+
+  singleRecipe = (uid, rid) => this.db.ref(`/users/${uid}/recipes/${rid}`)
+
   /* Global Recipes API */
 
   recipes = () => this.db.ref('/recipes')

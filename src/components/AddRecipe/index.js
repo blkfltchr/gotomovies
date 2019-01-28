@@ -31,55 +31,39 @@ class AddRecipe extends Component {
   onSubmit = event => {
     event.preventDefault()
 
-    const id = String(Date.now())
-
-    let newRecipe = [{
-      id: id,
-      ...this.state
-    }]
+    const id = Date.now()
 
     const USER_ID = this.props.userId
+
+    let newRecipes = {}
+
+    newRecipes[id] = { ...this.state }
 
     this.props.firebase
       .userRecipes(USER_ID)
       .once('value', snapshot => {
-        const USER_RECIPES = snapshot.val()
+        let userRecipes = snapshot.val()
 
-        if (USER_RECIPES) {
-          USER_RECIPES.push({
-            id: id,
-            ...this.state
-          })
-          newRecipe = USER_RECIPES
+        if (userRecipes) {
+          newRecipes = Object.assign(newRecipes, userRecipes)
         }
 
         this.props.firebase
           .userRecipes(USER_ID)
-          .set({ ...newRecipe })
+          .set({ ...newRecipes })
           .then(() => {
-            newRecipe = [{
-              id: id,
-              userId: USER_ID,
-              ...this.state
-            }]
-
             this.props.firebase
               .recipes()
               .once('value', snapshot => {
-                const RECIPES = snapshot.val()
+                let recipes = snapshot.val()
 
-                if (RECIPES) {
-                  RECIPES.push({
-                    id: id,
-                    userId: USER_ID,
-                    ...this.state
-                  })
-                  newRecipe = RECIPES
+                if (recipes) {
+                  recipes = Object.assign(newRecipes, recipes)
                 }
 
                 this.props.firebase
                   .recipes()
-                  .set({ ...newRecipe })
+                  .set({ ...newRecipes })
                   .then(() => {
                     this.setState({ ...INITIAL_STATE })
                     this.props.history.push('/recipes')
@@ -87,12 +71,6 @@ class AddRecipe extends Component {
               })
           })
       })
-  }
-
-  componentWillUnmount () {
-    this.props.firebase
-      .userRecipes()
-      .off()
   }
 
   render () {

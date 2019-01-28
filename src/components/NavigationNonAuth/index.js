@@ -7,46 +7,28 @@ import * as ROUTES from '../../constants/routes'
 
 const {
   LANDING,
-  SEARCH,
-  SIGNUP,
   LOGIN
 } = ROUTES
 
 const NavigationNonAuth = () => (
-  <nav className='navbar navbar-default'>
-    <div className='navbar-header'>
-      <button
-        className='navbar-toggle'
-        type='button'
-        data-target='#navbarCollapse'
-        data-toggle='collapse'>
-        <span className='sr-only'>Toggle navigation</span>
-        <span className='icon-bar' />
-        <span className='icon-bar' />
-        <span className='icon-bar' />
-      </button>
-      <Link
-        className='navbar-brand'
-        to={LANDING}>
-        Go To Recipes
-      </Link>
+  <div className='navbar navbar-expand-sm navbar-light bg-white'>
+    <Link className='navbar-brand' to={LANDING}>GoToRecipes</Link>
+    <button
+      className='navbar-toggler'
+      type='button'
+      data-toggle='collapse'
+      data-target='#navbarNavAltMarkup'
+      aria-controls='navbarNavAltMarkup'
+      aria-expanded='false'
+      aria-label='Toggle navigation'>
+      <span className='navbar-toggler-icon' />
+    </button>
+    <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
+      <div className='navbar nav-pills'>
+        <Link className='nav-item nav-link active' to={LOGIN}>Log In</Link>
+      </div>
     </div>
-    <div id='navbarCollapse' className='collapse navbar-collapse'>
-      <ul className='nav navbar-nav'>
-        <li>
-          <Link to={SEARCH}>Search for Recipes</Link>
-        </li>
-      </ul>
-      <ul className='nav navbar-nav navbar-right'>
-        <li>
-          <Link to={SIGNUP}>Sign Up</Link>
-        </li>
-        <li>
-          <Link to={LOGIN}>Log In</Link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  </div>
 )
 
 export default NavigationNonAuth

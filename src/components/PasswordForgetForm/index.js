@@ -42,18 +42,17 @@ class PasswordForgetForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          name='email'
-          value={this.state.email}
-          onChange={this.onChange}
-          type='text'
-          placeholder='Email'
-        />
-        <button
-          disabled={isInvalid}
-          type='submit'>
-          Reset My Password
-        </button>
+        <div className='form-group'>
+          <input
+            name='email'
+            value={this.state.email}
+            onChange={this.onChange}
+            type='email'
+            className='form-control'
+            placeholder='Email Address'
+          />
+        </div>
+        <button disabled={isInvalid} type='submit' className='btn btn-primary mb-3'>Send me an email to reset my password</button>
         {error && <p>{error.message}</p>}
       </form>
     )
