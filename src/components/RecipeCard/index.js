@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const RecipeCard = (props) => {
@@ -19,12 +18,12 @@ const RecipeCard = (props) => {
           src={image}
           alt={title} />
       </div>
-      <Link
+      <div
         style={{ textDecoration: 'none' }}
         to={`/recipes/${id}`}
         className='btn btn-primary btn-sm'>
         View full recipe<i className='fas fa-arrow-right' />
-      </Link>
+      </div>
     </div>
   )
 }
