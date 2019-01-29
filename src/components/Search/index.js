@@ -50,12 +50,13 @@ class Search extends Component {
   handleOnChange = event => {
     const text = event.target.value
     const { recipes } = this.state
+    const regexTitle = new RegExp(text, 'gi')
+    const regexIngredient = new RegExp(text, 'gi')
 
     if (text) {
       const filteredRecipes = recipes.filter(recipe =>
-        recipe.title.toLowerCase().search(text.toLowerCase()) >= 0)
-      // const filteredRecipes = recipes.filter(recipe =>
-      //   recipe.ingredients.join(' ').search(text.toLowerCase()) >= 0)
+        recipe.title.match(regexTitle) ||
+          recipe.ingredients.join(' ').match(regexIngredient))
 
       if (filteredRecipes.length) {
         this.setState({
