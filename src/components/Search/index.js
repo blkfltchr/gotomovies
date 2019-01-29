@@ -93,13 +93,22 @@ class Search extends Component {
 
     return (
       <div>
-        <input
-          name='searchText'
-          type='text'
-          placeholder='Search'
-          value={text}
-          onChange={this.handleOnChange}
-        />
+        <div className='container mt-3'>
+          <div className='input-group'>
+            <input
+              style={{ paddingLeft: '10px' }}
+              className='form-control py-2'
+              name='searchText'
+              type='text'
+              placeholder='Search...'
+              value={text}
+              onChange={this.handleOnChange}
+            />
+            <span className='input-group-append'>
+              <div className='input-group-text'><i className='fa fa-search' /></div>
+            </span>
+          </div>
+        </div>
         {noFilteredResults
           ? <h1>No results found.</h1>
           : <div className='recipe-list'>
