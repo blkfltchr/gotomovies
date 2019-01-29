@@ -52,8 +52,10 @@ class Search extends Component {
     const { recipes } = this.state
 
     if (text) {
+      // const filteredRecipes = recipes.filter(recipe =>
+      //   recipe.title.toLowerCase().search(text.toLowerCase()) >= 0)
       const filteredRecipes = recipes.filter(recipe =>
-        recipe.title.toLowerCase().search(text.toLowerCase()) >= 0)
+        recipe.ingredients.join(' ').search(text.toLowerCase()) >= 0)
 
       if (filteredRecipes.length) {
         this.setState({
@@ -90,7 +92,6 @@ class Search extends Component {
     } else if (!recipes.length) {
       return <h1>There are no recipes in the database.</h1>
     }
-
     return (
       <div>
         <div className='container mt-3'>
@@ -114,9 +115,9 @@ class Search extends Component {
           : <div className='recipe-list'>
             {filteredRecipes.length
               ? filteredRecipes.map((recipe, index) =>
-                <Link to={`/recipes/${recipe.id}`}><RecipeCard key={index} recipe={recipe} /></Link>)
+                <Link key={index} to={`/recipes/${recipe.id}`}><RecipeCard recipe={recipe} /></Link>)
               : recipes.map((recipe, index) =>
-                <Link to={`/recipes/${recipe.id}`}><RecipeCard key={index} recipe={recipe} /></Link>)}
+                <Link key={index} to={`/recipes/${recipe.id}`}><RecipeCard recipe={recipe} /></Link>)}
           </div>}
       </div>
     )
