@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import RecipeCard from '../RecipeCard'
 import PropTypes from 'prop-types'
 import { withFirebase } from '../Firebase'
@@ -92,24 +93,32 @@ class Search extends Component {
     } else if (!recipes.length) {
       return <h1>There are no recipes in the database.</h1>
     }
-
     return (
       <div>
-        <input
-          name='searchText'
-          type='text'
-          placeholder='Search'
-          value={text}
-          onChange={this.handleOnChange}
-        />
+        <div className='container mt-3'>
+          <div className='input-group'>
+            <input
+              style={{ paddingLeft: '10px' }}
+              className='form-control py-2'
+              name='searchText'
+              type='text'
+              placeholder='Search...'
+              value={text}
+              onChange={this.handleOnChange}
+            />
+            <span className='input-group-append'>
+              <div className='input-group-text'><i className='fa fa-search' /></div>
+            </span>
+          </div>
+        </div>
         {noFilteredResults
           ? <h1>No results found.</h1>
           : <div className='recipe-list'>
             {filteredRecipes.length
               ? filteredRecipes.map((recipe, index) =>
-                <RecipeCard key={index} recipe={recipe} />)
+                <Link style={{ textDecoration: 'none' }} key={index} to={`/recipes/${recipe.id}`}><RecipeCard recipe={recipe} /></Link>)
               : recipes.map((recipe, index) =>
-                <RecipeCard key={index} recipe={recipe} />)}
+                <Link style={{ textDecoration: 'none' }} key={index} to={`/recipes/${recipe.id}`}><RecipeCard recipe={recipe} /></Link>)}
           </div>}
       </div>
     )
