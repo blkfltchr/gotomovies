@@ -69,7 +69,6 @@ class SingleRecipe extends Component {
       return <h1>Loading...</h1>
     }
 
-    console.log(this.state)
     return (
       <div className='recipe-card'>
         <div className='flex-wrapper'>
