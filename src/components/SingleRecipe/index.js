@@ -69,6 +69,7 @@ class SingleRecipe extends Component {
       return <h1>Loading...</h1>
     }
 
+    console.log(this.state)
     return (
       <div className='recipe-card'>
         <div className='flex-wrapper'>
@@ -77,23 +78,25 @@ class SingleRecipe extends Component {
 
         <div className='delete-flex'>
           <h3>{title}</h3>
-          <div>
+          {/* <div>
             <i className='far fa-edit fa-2x' />
             <i className='far fa-trash-alt fa-2x delete-icon' />
-          </div>
+          </div> */}
         </div>
 
         <div>
-          <h5 className='recipe-description'>{description}</h5>
-          <h5 className='recipe-instructions'>{instructions}</h5>
-          {ingredients.map((index, ingredient) =>
-            <h5 key={index} className='recipe-ingredients'>{ingredient}</h5>
-          )}
-          <h5 className='recipe-preptime'>{preptime}</h5>
-          <h5 className='recipe-meail'>{meal}</h5>
+          <p>{description}</p>
+          <p>{instructions}</p>
+          <p> Ingredients:{' '}
+            {ingredients.map((ingredient, index) =>
+              <span key={index} className='recispane-ingredients'>{ingredient}, </span>
+            )}
+          </p>
+          <p>{preptime} minutes preptime</p>
+          <p>{meal}</p>
         </div>
 
-        <div className='modal fade'>
+        {/* <div className='modal fade'>
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='modal-header'>
@@ -125,7 +128,7 @@ class SingleRecipe extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }
