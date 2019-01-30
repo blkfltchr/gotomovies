@@ -85,6 +85,7 @@ class Recipes extends Component {
           <div className='recipe-list'>
             {recipes.map(recipe => (
               <Link
+                style={{ textDecoration: 'none' }}
                 key={recipe.id}
                 to={`/recipes/${recipe.id}`}
                 className='no-decoration'>

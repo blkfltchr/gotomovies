@@ -93,7 +93,6 @@ class Search extends Component {
     } else if (!recipes.length) {
       return <h1>There are no recipes in the database.</h1>
     }
-
     return (
       <div>
         <div className='container mt-3'>
