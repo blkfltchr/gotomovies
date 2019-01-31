@@ -31,9 +31,10 @@ class AddRecipe extends Component {
   onSubmit = event => {
     event.preventDefault()
 
-    const id = Date.now()
-
     const USER_ID = this.props.userId
+
+    const id = this.props.firebase
+      .userRecipes(USER_ID).push().key
 
     let newRecipes = {}
 
