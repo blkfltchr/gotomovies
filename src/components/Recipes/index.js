@@ -67,7 +67,12 @@ class Recipes extends Component {
     if (loading) {
       return <h1>Loading...</h1>
     } else if (noRecipes) {
-      return <h1>You do not have any recipes.</h1>
+      return (
+        <div>
+          <h1>You do not have any recipes.</h1>
+          <AddRecipeCard />
+        </div>
+      )
     }
 
     return (
