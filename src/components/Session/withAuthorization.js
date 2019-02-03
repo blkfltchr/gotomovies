@@ -13,13 +13,14 @@ const { LANDING } = ROUTES
 const withAuthorization = condition => Component => {
   class WithAuthorization extends React.Component {
     componentDidMount () {
-      this.listener = this.props.firebase.auth.onAuthStateChanged(
-        authUser => {
-          if (!condition(authUser)) {
-            this.props.history.push(LANDING)
+      this.listener = this.props.firebase.auth
+        .onAuthStateChanged(
+          authUser => {
+            if (!condition(authUser)) {
+              this.props.history.push(LANDING)
+            }
           }
-        }
-      )
+        )
     }
 
     componentWillUnmount () {
