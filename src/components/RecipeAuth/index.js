@@ -1,17 +1,66 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { compose } from 'recompose'
+import { withFirebase } from '../Firebase'
+import { withRouter } from 'react-router-dom'
 
 class RecipeAuth extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      uid: props.uid,
+      rid: props.rid,
+      title: props.recipe.title,
+      description: props.recipe.description,
+      image: props.recipe.image,
+      instructions: props.recipe.instructions,
+      meal: props.recipe.meal,
+      preptime: props.recipe.preptime
+    }
+  }
+
+  handleOnChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  updateRecipe = () => {
+    const {
+      uid,
+      rid,
+      ...userRecipeData
+    } = this.state
+
+    this.props.firebase
+      .singleRecipe(rid)
+      .update({
+        uid,
+        ...userRecipeData
+      })
+      .then(() => {
+        this.props.firebase
+          .singleUserRecipe(uid, rid)
+          .update({ ...userRecipeData })
+          .then(() => {
+            this.props.history.push('/recipes')
+          })
+          .catch(() => {
+            console.log('Error updating recipe.')
+          })
+      })
+  }
+
   render () {
     const {
       title,
       description,
       image,
-      ingredients,
+      // ingredients,
       instructions,
       meal,
       preptime
-    } = this.props.recipe
+    } = this.state
 
     return (
       <div className='recipe-card'>
@@ -20,25 +69,54 @@ class RecipeAuth extends Component {
         </div>
 
         <div className='delete-flex'>
-          <h3>{title}</h3>
+          <input
+            name='title'
+            type='text'
+            value={title}
+            onChange={this.handleOnChange}
+          />
           <div>
-            <i className='far fa-edit fa-2x' />
+            <i className='far fa-edit fa-2x' onClick={this.updateRecipe} />
             <i className='far fa-trash-alt fa-2x delete-icon' />
           </div>
         </div>
 
         <div>
-          <p>{description}</p>
-          <p>{instructions}</p>
-          <p> Ingredients:{' '}
+          <input
+            name='description'
+            type='text'
+            value={description}
+            onChange={this.handleOnChange}
+          />
+          <input
+            name='instructions'
+            type='text'
+            value={instructions}
+            onChange={this.handleOnChange}
+          />
+          {/* <p> Ingredients:{' '}
             {ingredients.map((ingredient, index) =>
               <span key={index} className='recispane-ingredients'>
-                {ingredient},
+                <input
+                  name='ingredient'
+                  type='text'
+                  value={ingredient}
+                />,
               </span>
             )}
-          </p>
-          <p>{preptime} minutes preptime</p>
-          <p>{meal}</p>
+          </p> */}
+          <input
+            name='preptime'
+            type='text'
+            value={preptime}
+            onChange={this.handleOnChange}
+          />
+          <input
+            name='meal'
+            type='text'
+            value={meal}
+            onChange={this.handleOnChange}
+          />
         </div>
       </div>
     )
@@ -46,6 +124,8 @@ class RecipeAuth extends Component {
 }
 
 RecipeAuth.propTypes = {
+  uid: PropTypes.string,
+  rid: PropTypes.string,
   recipe: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -54,7 +134,17 @@ RecipeAuth.propTypes = {
     instructions: PropTypes.string,
     meal: PropTypes.string,
     preptime: PropTypes.string
+  }),
+  firebase: PropTypes.shape({
+    singleRecipe: PropTypes.func,
+    singleUserRecipe: PropTypes.func
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func
   })
 }
 
-export default RecipeAuth
+export default compose(
+  withRouter,
+  withFirebase
+)(RecipeAuth)

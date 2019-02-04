@@ -67,6 +67,7 @@ class Recipe extends Component {
 
   render () {
     const { recipe, loading, authUser } = this.state
+    const rid = this.props.match.params.id
 
     if (loading || !recipe) {
       return <h1>Loading...</h1>
@@ -75,7 +76,11 @@ class Recipe extends Component {
     return (
       <div>
         {recipe && authUser
-          ? <RecipeAuth recipe={recipe} />
+          ? <RecipeAuth
+            recipe={recipe}
+            uid={authUser.uid}
+            rid={rid}
+          />
           : <RecipeNonAuth recipe={recipe} />}
       </div>
     )
