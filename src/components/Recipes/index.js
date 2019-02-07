@@ -5,6 +5,7 @@ import { withAuthorization } from '../Session'
 
 import RecipeCard from '../RecipeCard'
 import AddRecipeCard from '../AddRecipeCard'
+import SortByMeal from '../SortByMeal'
 
 import './index.css'
 
@@ -109,20 +110,17 @@ class Recipes extends Component {
         </div>
       )
     } else if (mealType !== 'all' && noFilteredResults === true) {
-      return <h1>There are no recipes for {mealType}...</h1>
+      return (
+        <div>
+          <SortByMeal handleOnClick={this.handleOnClick} />
+          <h1 className='text-center mt-3'>There are no recipes for {mealType}...</h1>
+        </div>
+      )
     }
 
     return (
       <div>
-        <p className='browse-meals'>Browse recipes by meal</p>
-
-        <div className='meal-buttons'>
-          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='all'>All</button>
-          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='breakfast'>Breakfast</button>
-          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='lunch'>Lunch</button>
-          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='dinner'>Dinner</button>
-        </div>
-
+        <SortByMeal handleOnClick={this.handleOnClick} />
         <div className='center'>
           <div className='recipe-list'>
             {theRecipes.map(recipe => (
