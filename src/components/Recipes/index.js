@@ -17,7 +17,10 @@ class Recipes extends Component {
     this.state = {
       recipes: [],
       loading: true,
-      noRecipes: false
+      noRecipes: false,
+      mealType: 'all',
+      filteredRecipes: [],
+      noFilteredResults: false
     }
   }
 
@@ -57,12 +60,48 @@ class Recipes extends Component {
       .off()
   }
 
+  handleOnClick = (event) => {
+    const mealType = event.target.name
+    const { recipes, meal } = this.state
+
+    if (meal !== 'all') {
+      const filteredRecipes = recipes.filter(recipe =>
+        recipe.meal === mealType
+      )
+      if (filteredRecipes.length) {
+        this.setState({
+          mealType,
+          filteredRecipes,
+          noFilteredResults: false
+        })
+      } else {
+        this.setState({
+          mealType,
+          noFilteredResults: true
+        })
+      }
+    } else {
+      this.setState({
+        mealType: 'all',
+        filteredRecipes: recipes,
+        noFilteredResults: false
+      })
+    }
+  }
+
   render () {
+    console.log('this.state.meal:', this.state.mealType)
+    console.log('this.state.filteredRecipes:', this.state.filteredRecipes)
+    console.log('this.state.recipes:', this.state.recipes)
     const {
-      recipes,
+      mealType,
+      noFilteredResults,
+      filteredRecipes,
       loading,
       noRecipes
     } = this.state
+
+    const theRecipes = mealType === 'all' ? this.state.recipes : filteredRecipes
 
     if (loading) {
       return <h1>Loading...</h1>
@@ -73,6 +112,8 @@ class Recipes extends Component {
           <AddRecipeCard />
         </div>
       )
+    } else if (noFilteredResults) {
+      return <h1>There are no recipes for {mealType}...</h1>
     }
 
     return (
@@ -80,16 +121,20 @@ class Recipes extends Component {
         <p className='browse-meals'>Browse recipes by meal</p>
 
         <div className='meal-buttons'>
-          <button className='btn btn-primary mx-2'>All</button>
-          <button className='btn btn-primary mx-2'>Breakfast</button>
-          <button className='btn btn-primary mx-2'>Lunch</button>
-          <button className='btn btn-primary mx-2'>Dinner</button>
+          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='all'>All</button>
+          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='breakfast'>Breakfast</button>
+          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='lunch'>Lunch</button>
+          <button className='btn btn-primary mx-2' onClick={this.handleOnClick} name='dinner'>Dinner</button>
         </div>
 
         <div className='center'>
           <div className='recipe-list'>
-            {recipes.map(recipe => (
-              <Link style={{ textDecoration: 'none' }}className='no-decoration' key={recipe.id} to={`/recipes/${recipe.id}`}>
+            {theRecipes.map(recipe => (
+              <Link
+                style={{ textDecoration: 'none' }}
+                className='no-decoration'
+                key={recipe.id}
+                to={`/recipes/${recipe.id}`}>
                 <RecipeCard recipe={recipe} />
               </Link>
             ))}
