@@ -17,7 +17,6 @@ class Recipes extends Component {
     this.state = {
       recipes: [],
       loading: true,
-      noRecipes: false,
       mealType: 'all',
       filteredRecipes: [],
       noFilteredResults: false
@@ -40,12 +39,10 @@ class Recipes extends Component {
 
           this.setState({
             recipes: userRecipesList,
-            loading: false,
-            noRecipes: false
+            loading: false
           })
         } else {
           this.setState({
-            noRecipes: true,
             loading: false
           })
         }
@@ -82,8 +79,6 @@ class Recipes extends Component {
       }
     } else {
       this.setState({
-        mealType: 'all',
-        filteredRecipes: recipes,
         noFilteredResults: false
       })
     }
@@ -93,26 +88,27 @@ class Recipes extends Component {
     console.log('this.state.meal:', this.state.mealType)
     console.log('this.state.filteredRecipes:', this.state.filteredRecipes)
     console.log('this.state.recipes:', this.state.recipes)
+    console.log('this.state.noFilteredResults:', this.state.noFilteredResults)
     const {
       mealType,
       noFilteredResults,
       filteredRecipes,
       loading,
-      noRecipes
+      recipes
     } = this.state
 
     const theRecipes = mealType === 'all' ? this.state.recipes : filteredRecipes
 
     if (loading) {
       return <h1>Loading...</h1>
-    } else if (noRecipes) {
+    } else if (recipes.length === 0) {
       return (
         <div>
           <h1>You do not have any recipes.</h1>
           <AddRecipeCard />
         </div>
       )
-    } else if (noFilteredResults) {
+    } else if (mealType !== 'all' && noFilteredResults === true) {
       return <h1>There are no recipes for {mealType}...</h1>
     }
 
