@@ -1,0 +1,12 @@
+.jumbo-background {
+    background-image: url(../../assets/dark-wood-and-vegetables.jpg);
+    background-size: cover;
+    height: 90vh;
+  }
+
+.login-box {
+  width: 500px; 
+  background-color: #f6f9fc; 
+  padding: 20px 40px; 
+  border-radius: 10px
+}

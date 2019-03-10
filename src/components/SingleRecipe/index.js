@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { withAuthorization } from '../Session'
 
 import './index.css'
@@ -129,6 +130,11 @@ class SingleRecipe extends Component {
             </div>
           </div>
         </div> */}
+        <div className='row'>
+          <Link to='/recipes' className='btn btn-link'>
+            <i className='fas fa-arrow-circle-left' />Go Back To My Recipes
+          </Link>
+        </div>
       </div>
     )
   }

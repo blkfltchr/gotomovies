@@ -93,6 +93,7 @@ class AddRecipe extends Component {
                   className='form-control'
                   name='title'
                   required
+                  placeholder='Healthy eggs'
                   onChange={this.onChange}
                   value={this.state.title}
                 />
@@ -105,6 +106,7 @@ class AddRecipe extends Component {
                   className='form-control'
                   name='description'
                   required
+                  placeholder='Fried eggs with beans and spinach, topped with salsa and hot sauce'
                   onChange={this.onChange}
                   value={this.state.description}
                 />
@@ -117,6 +119,7 @@ class AddRecipe extends Component {
                   className='form-control'
                   name='instructions'
                   required
+                  placeholder='Add oil and spinach to a frying pan. Once the spinach has started shrivelling up, break your desired number of eggs into the frying pan. Soon after, add beans. Once cooked, top with salsa and hot sauce.'
                   onChange={this.onChange}
                   value={this.state.instructions}
                 />
@@ -129,6 +132,7 @@ class AddRecipe extends Component {
                   className='form-control'
                   name='ingredients'
                   required
+                  placeholder='eggs, spinach, salsa, hot sauce, beans'
                   onChange={this.onChange}
                   onBlur={e => this.setState({ [e.target.name]: e.target.value.split(/[ ,]+/) })}
                   value={this.state.ingredients}
@@ -142,6 +146,7 @@ class AddRecipe extends Component {
                   className='form-control'
                   name='preptime'
                   required
+                  placeholder='25'
                   onChange={this.onChange}
                   value={this.state.preptime}
                 />
@@ -168,6 +173,7 @@ class AddRecipe extends Component {
                   className='form-control'
                   name='image'
                   required
+                  placeholder='https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg'
                   onChange={this.onChange}
                   value={this.state.image}
                 />

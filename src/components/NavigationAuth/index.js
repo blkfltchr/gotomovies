@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
 
 const {
-  LANDING,
   ACCOUNT,
   RECIPES,
   ADD_RECIPE,
@@ -15,7 +14,7 @@ const {
 
 const NavigationAuth = () => (
   <div className='navbar navbar-expand-sm navbar-light bg-white'>
-    <Link className='navbar-brand' to={LANDING}>GoToRecipes</Link>
+    <Link className='navbar-brand' to={RECIPES}>GoToRecipes</Link>
     <button
       className='navbar-toggler'
       type='button'
