@@ -8,7 +8,7 @@ import { compose } from 'recompose'
 
 import * as ROUTES from '../../constants/routes'
 
-const { LANDING } = ROUTES
+const { LOGIN } = ROUTES
 
 const withAuthorization = condition => Component => {
   class WithAuthorization extends React.Component {
@@ -16,7 +16,7 @@ const withAuthorization = condition => Component => {
       this.listener = this.props.firebase.auth.onAuthStateChanged(
         authUser => {
           if (!condition(authUser)) {
-            this.props.history.push(LANDING)
+            this.props.history.push(LOGIN)
           }
         }
       )
