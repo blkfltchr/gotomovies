@@ -5,6 +5,7 @@ import { withAuthorization } from '../Session'
 
 import RecipeCard from '../RecipeCard'
 import AddRecipeCard from '../AddRecipeCard'
+import SortByMeal from '../SortByMeal'
 
 import './index.css'
 
@@ -17,7 +18,9 @@ class Recipes extends Component {
     this.state = {
       recipes: [],
       loading: true,
-      noRecipes: false
+      mealType: 'all',
+      filteredRecipes: [],
+      noFilteredResults: false
     }
   }
 
@@ -37,12 +40,10 @@ class Recipes extends Component {
 
           this.setState({
             recipes: userRecipesList,
-            loading: false,
-            noRecipes: false
+            loading: false
           })
         } else {
           this.setState({
-            noRecipes: true,
             loading: false
           })
         }
@@ -57,38 +58,77 @@ class Recipes extends Component {
       .off()
   }
 
+  handleOnClick = (event) => {
+    const mealType = event.target.name
+    const { recipes, meal } = this.state
+
+    if (meal !== 'all') {
+      const filteredRecipes = recipes.filter(recipe =>
+        recipe.meal === mealType
+      )
+      if (filteredRecipes.length) {
+        this.setState({
+          mealType,
+          filteredRecipes,
+          noFilteredResults: false
+        })
+      } else {
+        this.setState({
+          mealType,
+          noFilteredResults: true
+        })
+      }
+    } else {
+      this.setState({
+        noFilteredResults: false
+      })
+    }
+  }
+
   render () {
+    console.log('this.state.meal:', this.state.mealType)
+    console.log('this.state.filteredRecipes:', this.state.filteredRecipes)
+    console.log('this.state.recipes:', this.state.recipes)
+    console.log('this.state.noFilteredResults:', this.state.noFilteredResults)
     const {
-      recipes,
+      mealType,
+      noFilteredResults,
+      filteredRecipes,
       loading,
-      noRecipes
+      recipes
     } = this.state
+
+    const theRecipes = mealType === 'all' ? this.state.recipes : filteredRecipes
 
     if (loading) {
       return <h1>Loading...</h1>
-    } else if (noRecipes) {
-      return <h1>You do not have any recipes.</h1>
+    } else if (recipes.length === 0) {
+      return (
+        <div>
+          <h1>You do not have any recipes.</h1>
+          <AddRecipeCard />
+        </div>
+      )
+    } else if (mealType !== 'all' && noFilteredResults === true) {
+      return (
+        <div>
+          <SortByMeal handleOnClick={this.handleOnClick} />
+          <h1 className='text-center mt-3'>There are no recipes for {mealType}...</h1>
+        </div>
+      )
     }
 
     return (
       <div>
-        <p className='browse-meals'>Browse recipes by meal</p>
-
-        <div className='meal-buttons'>
-          <button className='btn btn-primary mx-2'>All</button>
-          <button className='btn btn-primary mx-2'>Breakfast</button>
-          <button className='btn btn-primary mx-2'>Lunch</button>
-          <button className='btn btn-primary mx-2'>Dinner</button>
-        </div>
-
+        <SortByMeal handleOnClick={this.handleOnClick} />
         <div className='center'>
           <div className='recipe-list'>
-            {recipes.map(recipe => (
+            {theRecipes.map(recipe => (
               <Link
                 style={{ textDecoration: 'none' }}
+                className='no-decoration'
                 key={recipe.id}
-                to={`/recipes/${recipe.id}`}
-                className='no-decoration'>
+                to={`/recipes/${recipe.id}`}>
                 <RecipeCard recipe={recipe} />
               </Link>
             ))}
