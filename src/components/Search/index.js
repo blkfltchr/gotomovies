@@ -56,7 +56,7 @@ class Search extends Component {
     if (text) {
       const filteredRecipes = recipes.filter(recipe =>
         recipe.title.match(regexTitle) ||
-          recipe.ingredients.join(' ').match(regexIngredient))
+          recipe.ingredients.join('').match(regexIngredient))
 
       if (filteredRecipes.length) {
         this.setState({

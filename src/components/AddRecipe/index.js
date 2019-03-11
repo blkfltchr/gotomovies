@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withAuthorization } from '../Session'
 
+import './index.css'
+
 const condition = authUser => !!authUser
 
 const INITIAL_STATE = {
   title: '',
-  description: '',
   image: '',
+  description: '',
   ingredients: [],
   instructions: '',
-  meal: '',
-  preptime: ''
+  preptime: '',
+  mealTypes: []
 }
 
 class AddRecipe extends Component {
@@ -26,6 +28,37 @@ class AddRecipe extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+  }
+
+  ingredientChange = (event, index) => {
+    const ingredients = [...this.state.ingredients]
+    ingredients[index] = event.target.value
+    this.setState({ ingredients })
+  }
+
+  addIngredient = () => {
+    this.setState({
+      ingredients: [...this.state.ingredients, '']
+    })
+  }
+
+  removeIngredient = (index) => {
+    const ingredients = [...this.state.ingredients]
+    ingredients.splice(index, 1)
+    this.setState({ ingredients })
+  }
+
+  mealCheck = (event) => {
+    const mealTypes = [...this.state.mealTypes]
+    const index = mealTypes.indexOf(event.target.value)
+
+    if (index > -1) {
+      mealTypes.splice(index, 1)
+    } else {
+      mealTypes.push(event.target.value)
+    }
+
+    this.setState({ mealTypes })
   }
 
   onSubmit = event => {
@@ -75,6 +108,15 @@ class AddRecipe extends Component {
   }
 
   render () {
+    const {
+      title,
+      image,
+      description,
+      ingredients,
+      instructions,
+      preptime
+    } = this.state
+
     return (
       <div style={{ width: '90vw', margin: '2rem auto' }}>
         <div className='row'>
@@ -84,93 +126,117 @@ class AddRecipe extends Component {
         </div>
 
         <div className='card'>
-          <div className='card-header'>Add Recipe</div>
+          <div className='card-header'>
+            Add Recipe
+          </div>
           <div className='card-body'>
-            <form onSubmit={this.onSubmit}>
+            <div>
               <div className='form-group'>
-                <label htmlFor='title'>Title</label>
                 <input
                   type='text'
                   className='form-control'
                   name='title'
                   required
+                  placeholder='Title'
                   onChange={this.onChange}
-                  value={this.state.title}
+                  value={title}
                 />
               </div>
 
               <div className='form-group'>
-                <label htmlFor='description'>Description</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='description'
-                  required
-                  onChange={this.onChange}
-                  value={this.state.description}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='instructions'>Instructions</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='instructions'
-                  required
-                  onChange={this.onChange}
-                  value={this.state.instructions}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='ingredients'>Ingredients <span style={{ fontStyle: 'italic' }}>(seperate with commas and spaces)</span></label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='ingredients'
-                  required
-                  onChange={this.onChange}
-                  onBlur={e => this.setState({ [e.target.name]: e.target.value.split(/[ ,]+/) })}
-                  value={this.state.ingredients}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='preptime'>Prep time</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='preptime'
-                  required
-                  onChange={this.onChange}
-                  value={this.state.preptime}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='meal'>Meal</label>
-                <select
-                  className='form-control'
-                  name='meal'
-                  required
-                  onChange={this.onChange}
-                  value={this.state.meal}>
-                  <option value='breakfast'>Breakfast</option>
-                  <option value='lunch'>Lunch</option>
-                  <option value='dinner'>Dinner</option>
-                </select>
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='image'>Image</label>
                 <input
                   type='text'
                   className='form-control'
                   name='image'
                   required
+                  placeholder='Image'
                   onChange={this.onChange}
-                  value={this.state.image}
+                  value={image}
+                />
+              </div>
+
+              <div className='form-group'>
+                <input
+                  type='text'
+                  className='form-control'
+                  name='description'
+                  required
+                  placeholder='Description'
+                  onChange={this.onChange}
+                  value={description}
+                />
+              </div>
+              
+              <div className='ingredients-list'>
+                {ingredients.map((ingredient, index) => {
+                  return (
+                    <div className='form-group ingredient' key={index}>
+                      <input
+                        className='form-control ingredient-input'
+                        placeholder={`Ingredient ${index + 1}`}
+                        value={ingredient}
+                        onChange={(event) =>
+                          this.ingredientChange(event, index)}
+                        required
+                      />
+                      <button
+                        className='btn btn-danger delete-ingredient'
+                        onClick={this.removeIngredient}>
+                        Delete
+                      </button>
+                    </div>
+                  )
+                })}
+              </div>
+              <button
+                className='btn btn-success add-ingredient'
+                onClick={this.addIngredient}>
+                Add Ingredient
+              </button>
+
+              <div className='form-group'>
+                <textarea
+                  type='text'
+                  className='form-control instructions'
+                  name='instructions'
+                  rows='10'
+                  required
+                  placeholder='Instructions'
+                  onChange={this.onChange}
+                  value={instructions}
+                />
+              </div>
+
+              <div className='form-group'>
+                <input
+                  type='number'
+                  className='form-control'
+                  name='preptime'
+                  required
+                  placeholder='Prep Time'
+                  onChange={this.onChange}
+                  value={preptime}
+                />
+              </div>
+
+              <div className='form-group mealType'>
+                <label>Breakfast</label>
+                <input
+                  type='checkbox'
+                  value='breakfast'
+                  onClick={this.mealCheck}
+                />
+                <label>Lunch</label>
+                <input
+                  type='checkbox'
+                  value='lunch'
+                  onClick={this.mealCheck}
+                />
+                <label>Dinner</label>
+                <input
+                  type='checkbox'
+                  value='dinner'
+                  onClick={this.mealCheck}
                 />
               </div>
 
@@ -178,8 +244,9 @@ class AddRecipe extends Component {
                 type='submit'
                 value='Submit'
                 className='btn btn-primary btn-block'
+                onClick={this.onSubmit}
               />
-            </form>
+            </div>
           </div>
         </div>
       </div>
