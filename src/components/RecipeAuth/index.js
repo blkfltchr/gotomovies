@@ -126,13 +126,13 @@ const RecipeAuth = (props) => {
           checked={mealTypes.indexOf('dinner') > -1}
           onChange={mealChange} />
       </div>
-      
+
       <input
         className='btn btn-primary btn-block'
         type='button'
         value={add ? 'Add Recipe' : 'Update Recipe'}
         onClick={add || update} />
-      {update
+      {remove
         ? <input
           className='btn btn-danger btn-block'
           type='button'
