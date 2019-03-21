@@ -7,21 +7,20 @@ import RecipeAuth from '../RecipeAuth'
 
 const condition = authUser => !!authUser
 
-const INITIAL_STATE = {
-  title: '',
-  image: '',
-  description: '',
-  ingredients: [],
-  instructions: '',
-  preptime: '',
-  mealTypes: []
-}
-
-class AddRecipe extends Component {
+class EditRecipe extends Component {
   constructor (props) {
     super(props)
-
-    this.state = { ...INITIAL_STATE }
+    this.state = {
+      uid: props.uid,
+      rid: props.rid,
+      title: props.recipe.title,
+      image: props.recipe.image,
+      description: props.recipe.description,
+      ingredients: props.recipe.ingredients,
+      instructions: props.recipe.instructions,
+      preptime: props.recipe.preptime,
+      mealTypes: props.recipe.mealTypes
+    }
   }
 
   handleOnChange = event => {
@@ -34,12 +33,6 @@ class AddRecipe extends Component {
     const ingredients = [...this.state.ingredients]
     ingredients[index] = event.target.value
     this.setState({ ingredients })
-  }
-
-  addIngredient = () => {
-    this.setState({
-      ingredients: [...this.state.ingredients, '']
-    })
   }
 
   removeIngredient = (index) => {
@@ -61,48 +54,28 @@ class AddRecipe extends Component {
     this.setState({ mealTypes })
   }
 
-  add = event => {
-    event.preventDefault()
-
-    const USER_ID = this.props.userId
-
-    const id = this.props.firebase
-      .userRecipes(USER_ID).push().key
-
-    let newRecipes = {}
-
-    newRecipes[id] = { ...this.state }
+  update = () => {
+    const {
+      uid,
+      rid,
+      ...userRecipeData
+    } = this.state
 
     this.props.firebase
-      .userRecipes(USER_ID)
-      .once('value', snapshot => {
-        let userRecipes = snapshot.val()
-
-        if (userRecipes) {
-          newRecipes = Object.assign(newRecipes, userRecipes)
-        }
-
+      .singleRecipe(rid)
+      .update({
+        uid,
+        ...userRecipeData
+      })
+      .then(() => {
         this.props.firebase
-          .userRecipes(USER_ID)
-          .set({ ...newRecipes })
+          .singleUserRecipe(uid, rid)
+          .update({ ...userRecipeData })
           .then(() => {
-            this.props.firebase
-              .recipes()
-              .once('value', snapshot => {
-                let recipes = snapshot.val()
-
-                if (recipes) {
-                  recipes = Object.assign(newRecipes, recipes)
-                }
-
-                this.props.firebase
-                  .recipes()
-                  .set({ ...newRecipes })
-                  .then(() => {
-                    this.setState({ ...INITIAL_STATE })
-                    this.props.history.push('/recipes')
-                  })
-              })
+            this.props.history.push('/recipes')
+          })
+          .catch(() => {
+            console.log('Error updating recipe.')
           })
       })
   }
@@ -118,15 +91,14 @@ class AddRecipe extends Component {
         </div>
 
         <div className='card'>
-          <div className='card-header'>Add Recipe</div>
+          <div className='card-header'>Edit Recipe</div>
           <RecipeAuth
-            addRecipe={this.state}
+            editRecipe={this.state}
             handleOnChange={this.handleOnChange}
             ingredientChange={this.ingredientChange}
-            addIngredient={this.addIngredient}
             removeIngredient={this.removeIngredient}
             mealChange={this.mealChange}
-            add={this.add}
+            update={this.update}
           />
         </div>
       </div>
@@ -134,15 +106,25 @@ class AddRecipe extends Component {
   }
 }
 
-AddRecipe.propTypes = {
-  userId: PropTypes.string,
+EditRecipe.propTypes = {
+  uid: PropTypes.string,
+  rid: PropTypes.string,
+  recipe: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    ingredients: PropTypes.array,
+    instructions: PropTypes.string,
+    mealTypes: PropTypes.array,
+    preptime: PropTypes.string
+  }),
   firebase: PropTypes.shape({
-    userRecipes: PropTypes.func,
-    recipes: PropTypes.func
+    singleRecipe: PropTypes.func,
+    singleUserRecipe: PropTypes.func
   }),
   history: PropTypes.shape({
     push: PropTypes.func
   })
 }
 
-export default withAuthorization(condition)(AddRecipe)
+export default withAuthorization(condition)(EditRecipe)

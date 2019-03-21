@@ -128,7 +128,7 @@ class Recipes extends Component {
                 style={{ textDecoration: 'none' }}
                 className='no-decoration'
                 key={recipe.id}
-                to={`/recipes/${recipe.id}`}>
+                to={`/recipes/edit/${recipe.id}`}>
                 <RecipeCard recipe={recipe} />
               </Link>
             ))}
