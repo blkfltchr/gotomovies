@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withAuthorization } from '../Session'
 
+import RecipeAuth from '../RecipeAuth'
+
 const condition = authUser => !!authUser
 
 const INITIAL_STATE = {
   title: '',
-  description: '',
   image: '',
+  description: '',
   ingredients: [],
   instructions: '',
-  meal: '',
-  preptime: ''
+  preptime: '',
+  mealTypes: []
 }
 
 class AddRecipe extends Component {
@@ -22,18 +24,50 @@ class AddRecipe extends Component {
     this.state = { ...INITIAL_STATE }
   }
 
-  onChange = event => {
+  handleOnChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
-  onSubmit = event => {
+  ingredientChange = (event, index) => {
+    const ingredients = [...this.state.ingredients]
+    ingredients[index] = event.target.value
+    this.setState({ ingredients })
+  }
+
+  addIngredient = () => {
+    this.setState({
+      ingredients: [...this.state.ingredients, '']
+    })
+  }
+
+  removeIngredient = (index) => {
+    const ingredients = [...this.state.ingredients]
+    ingredients.splice(index, 1)
+    this.setState({ ingredients })
+  }
+
+  mealChange = (event) => {
+    const mealTypes = [...this.state.mealTypes]
+    const index = mealTypes.indexOf(event.target.value)
+
+    if (index > -1) {
+      mealTypes.splice(index, 1)
+    } else {
+      mealTypes.push(event.target.value)
+    }
+
+    this.setState({ mealTypes })
+  }
+
+  add = event => {
     event.preventDefault()
 
-    const id = Date.now()
-
     const USER_ID = this.props.userId
+
+    const id = this.props.firebase
+      .userRecipes(USER_ID).push().key
 
     let newRecipes = {}
 
@@ -78,114 +112,22 @@ class AddRecipe extends Component {
       <div style={{ width: '90vw', margin: '2rem auto' }}>
         <div className='row'>
           <Link to='/recipes' className='btn btn-link'>
-            <i className='fas fa-arrow-circle-left' />Go Back To My Recipes
+            <i className='fas fa-arrow-circle-left' />
+            Go Back To My Recipes
           </Link>
         </div>
 
         <div className='card'>
           <div className='card-header'>Add Recipe</div>
-          <div className='card-body'>
-            <form onSubmit={this.onSubmit}>
-              <div className='form-group'>
-                <label htmlFor='title'>Title</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='title'
-                  required
-                  placeholder='Healthy eggs'
-                  onChange={this.onChange}
-                  value={this.state.title}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='description'>Description</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='description'
-                  required
-                  placeholder='Fried eggs with beans and spinach, topped with salsa and hot sauce'
-                  onChange={this.onChange}
-                  value={this.state.description}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='instructions'>Instructions</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='instructions'
-                  required
-                  placeholder='Add oil and spinach to a frying pan. Once the spinach has started shrivelling up, break your desired number of eggs into the frying pan. Soon after, add beans. Once cooked, top with salsa and hot sauce.'
-                  onChange={this.onChange}
-                  value={this.state.instructions}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='ingredients'>Ingredients <span style={{ fontStyle: 'italic' }}>(seperate with commas and spaces)</span></label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='ingredients'
-                  required
-                  placeholder='eggs, spinach, salsa, hot sauce, beans'
-                  onChange={this.onChange}
-                  onBlur={e => this.setState({ [e.target.name]: e.target.value.split(/[ ,]+/) })}
-                  value={this.state.ingredients}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='preptime'>Prep time</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='preptime'
-                  required
-                  placeholder='25'
-                  onChange={this.onChange}
-                  value={this.state.preptime}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='meal'>Meal</label>
-                <select
-                  className='form-control'
-                  name='meal'
-                  required
-                  onChange={this.onChange}
-                  value={this.state.meal}>
-                  <option value='breakfast'>Breakfast</option>
-                  <option value='lunch'>Lunch</option>
-                  <option value='dinner'>Dinner</option>
-                </select>
-              </div>
-
-              <div className='form-group'>
-                <label htmlFor='image'>Image</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='image'
-                  required
-                  placeholder='https://www.weightwatchers.com/images/1033/dynamic/foodandrecipes/2016/02/Southwest-InspiredBalckBeansAndEggs_JF16_EAT_FTR1_EGGS_800x800.jpg'
-                  onChange={this.onChange}
-                  value={this.state.image}
-                />
-              </div>
-
-              <input
-                type='submit'
-                value='Submit'
-                className='btn btn-primary btn-block'
-              />
-            </form>
-          </div>
+          <RecipeAuth
+            addRecipe={this.state}
+            handleOnChange={this.handleOnChange}
+            ingredientChange={this.ingredientChange}
+            addIngredient={this.addIngredient}
+            removeIngredient={this.removeIngredient}
+            mealChange={this.mealChange}
+            add={this.add}
+          />
         </div>
       </div>
     )

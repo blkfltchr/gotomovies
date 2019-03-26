@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const RecipeCard = (props) => {
-  const { title, image, id } = props.recipe
+  const { id, title, image } = props.recipe
   return (
     <div className='card' style={{
       width: '255px',
@@ -22,7 +22,7 @@ const RecipeCard = (props) => {
         style={{ textDecoration: 'none' }}
         to={`/recipes/${id}`}
         className='btn btn-primary btn-sm'>
-        View full recipe<i className='fas fa-arrow-right' />
+        View Full Recipe<i className='fas fa-arrow-right' />
       </div>
     </div>
   )
