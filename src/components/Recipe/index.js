@@ -86,16 +86,14 @@ class Recipe extends Component {
             alt={title} />
         </div>
 
-        <div className='recipe-description'>
-          <p>{description}</p>
-        </div>
+        <div className='recipe-description'>{description}</div>
 
         <div className='recipe-ingredients'>
           <h4>Ingredients</h4>
           {ingredients.map((ingredient, index) =>
             <span
-              key={index}
-              className='ingredient'>
+              className='ingredient'
+              key={index}>
               {ingredient}
             </span>
           )}
