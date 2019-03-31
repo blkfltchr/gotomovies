@@ -14,8 +14,7 @@ class Recipe extends Component {
       description: '',
       ingredients: [],
       instructions: '',
-      preptime: '',
-      mealTypes: []
+      preptime: ''
     }
   }
 
@@ -64,8 +63,7 @@ class Recipe extends Component {
       description,
       ingredients,
       instructions,
-      preptime,
-      mealTypes
+      preptime
     } = this.state
 
     if (loading) {
@@ -74,26 +72,38 @@ class Recipe extends Component {
 
     return (
       <div className='recipe-card'>
-        <div className='flex-wrapper'>
-          <img src={image} alt={title} className='recipe-image' />
+        <div className='recipe-header'>
+          <div className='recipe-header-left'>
+            <h3 className='recipe-title'>{title}</h3>
+            <div className='preptime'>
+              <h5>Prep</h5>
+              <h5>{preptime} MIN</h5>
+            </div>
+          </div>
+          <img
+            className='recipe-image'
+            src={image}
+            alt={title} />
         </div>
-        <div className='delete-flex'>
-          <h3>{title}</h3>
-        </div>
-        <div>
+
+        <div className='recipe-description'>
           <p>{description}</p>
+        </div>
+
+        <div className='recipe-ingredients'>
+          <h4>Ingredients</h4>
+          {ingredients.map((ingredient, index) =>
+            <span
+              key={index}
+              className='ingredient'>
+              {ingredient}
+            </span>
+          )}
+        </div>
+
+        <div className='recipe-instructions'>
+          <h4>Instructions</h4>
           <p>{instructions}</p>
-          <p> Ingredients:{' '}
-            {ingredients.map((ingredient, index) =>
-              <span key={index} className='recispane-ingredients'>{ingredient}</span>
-            )}
-          </p>
-          <p>{preptime} minutes preptime</p>
-          <p> Meal Type:{' '}
-            {mealTypes.map((type, index) =>
-              <span key={index} className='recispane-ingredients'>{type}</span>
-            )}
-          </p>
         </div>
       </div>
     )
