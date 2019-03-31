@@ -97,7 +97,7 @@ class EditRecipe extends Component {
     this.setState({ mealTypes })
   }
 
-  remove = () => {
+  update = () => {
     const USER_ID = this.props.userId
     const RECIPE_ID = this.props.match.params.id
 
@@ -133,7 +133,6 @@ class EditRecipe extends Component {
   remove = () => {
     const USER_ID = this.props.userId
     const RECIPE_ID = this.props.match.params.id
-
 
     if (USER_ID && RECIPE_ID) {
       this.props.firebase

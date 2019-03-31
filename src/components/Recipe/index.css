@@ -43,6 +43,7 @@
 
 .recipe-instructions {
   margin: 2rem 0 0 0;
+  white-space: pre;
 }
 
 @media (max-width: 965px) {
