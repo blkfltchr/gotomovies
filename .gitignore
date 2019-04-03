@@ -23,5 +23,10 @@ yarn-error.log*
 
 /legacy
 
-#VS Code 
+# VS Code 
 .vscode/
+
+# Firebase
+.firebase/
+firebase.json
+.firebaserc
