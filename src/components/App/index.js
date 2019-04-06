@@ -4,7 +4,7 @@ import { withAuthentication } from '../Session'
 
 import Navigation from '../Navigation'
 import Landing from '../Landing'
-import Account from '../Account'
+import Settings from '../Settings'
 import Recipes from '../Recipes'
 import Search from '../Search'
 import Recipe from '../Recipe'
@@ -22,7 +22,6 @@ import * as ROUTES from '../../constants/routes'
 
 const {
   LANDING,
-  ACCOUNT,
   RECIPES,
   ADD_RECIPE,
   EDIT_RECIPE,
@@ -30,6 +29,7 @@ const {
   SEARCH,
   SIGNUP,
   LOGIN,
+  SETTINGS,
   PASSWORD_FORGET
 } = ROUTES
 
@@ -39,7 +39,7 @@ const App = () => {
       <Navigation />
       <Switch>
         <Route exact path={LANDING} component={Landing} />
-        <Route exact path={ACCOUNT} component={Account} />
+        <Route exact path={SETTINGS} component={Settings} />
         <Route exact path={SIGNUP} component={SignUp} />
         <Route exact path={LOGIN} component={LogIn} />
         <Route exact path={PASSWORD_FORGET} component={PasswordForget} />

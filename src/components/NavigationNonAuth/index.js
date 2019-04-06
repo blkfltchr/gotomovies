@@ -6,28 +6,45 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
 
 const {
-  LANDING,
-  LOGIN
+  LOGIN,
+  SIGNUP,
+  SEARCH
 } = ROUTES
 
 const NavigationNonAuth = () => (
-  <div className='navbar navbar-expand-sm navbar-light bg-white'>
-    <Link className='navbar-brand' to={LANDING}>GoToRecipes</Link>
-    <button
-      className='navbar-toggler'
-      type='button'
-      data-toggle='collapse'
-      data-target='#navbarNavAltMarkup'
-      aria-controls='navbarNavAltMarkup'
-      aria-expanded='false'
-      aria-label='Toggle navigation'>
-      <span className='navbar-toggler-icon' />
-    </button>
-    <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
-      <div className='navbar nav-pills'>
-        <Link className='nav-item nav-link active' to={LOGIN}>Log In</Link>
-      </div>
-    </div>
+  <div
+    className='collapse navbar-collapse main-menu'
+    id='navbarContent'>
+    <ul className='navbar-nav'>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to='/'>
+          HOME
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to={SIGNUP}>
+          SIGNUP
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to={LOGIN}>
+          LOG IN
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to={SEARCH}>
+          SEARCH
+        </Link>
+      </li>
+    </ul>
   </div>
 )
 

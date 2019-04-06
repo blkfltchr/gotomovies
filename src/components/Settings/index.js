@@ -6,7 +6,7 @@ import LogOutButton from '../Logout'
 
 const condition = authUser => !!authUser
 
-const Account = () => (
+const Settings = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div className='container mt-2'>
@@ -18,4 +18,4 @@ const Account = () => (
   </AuthUserContext.Consumer>
 )
 
-export default withAuthorization(condition)(Account)
+export default withAuthorization(condition)(Settings)

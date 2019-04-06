@@ -1,6 +1,8 @@
 import React from 'react'
-import JumboTron from '../JumboTron'
+import Banner from './banner'
 
-const Landing = () => <JumboTron />
+const Landing = () => (
+  <Banner />
+)
 
 export default Landing
