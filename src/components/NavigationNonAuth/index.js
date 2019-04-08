@@ -27,7 +27,7 @@ const NavigationNonAuth = () => (
         <Link
           className='nav-link'
           to={SIGNUP}>
-          SIGNUP
+          SIGN UP
         </Link>
       </li>
       <li className='nav-item'>
