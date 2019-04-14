@@ -69,6 +69,10 @@
 .footer-content {
     text-align: center;
 }
+
+.footer-content a {
+    color: #ffb606;
+}
  
 @media(max-width: 768px) {
     .banner-container {

@@ -7,7 +7,7 @@ const Footer = () => (
     <div className='container'>
       <div className='row'>
         <div className='col-lg-12 col-md-12 footer-content'>
-          <span>Copyright &#169;2019 All rights reserved | The source code for this web application can be found on this
+          <span>Copyright &#169;{new Date().getFullYear()} All rights reserved | The source code for this web application can be found on this
             <a
               href='https://github.com/blkfltchr/gotorecipes'
               target='_blank'

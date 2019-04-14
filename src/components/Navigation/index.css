@@ -40,12 +40,16 @@ a:hover {
   justify-content: flex-end;
 }
 
+.main-menu ul li {
+  padding: 1rem 2rem 0 0;
+}
+
 .main-menu ul a {
-  color: #131230;
+  color: #ffb606;
   font-family: "Roboto", sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-style: italic;
   font-weight: bold;
-  padding: 1rem 1rem 0 1rem;
 }
 
 @media (max-width: 991px) {
