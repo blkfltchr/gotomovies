@@ -1,0 +1,85 @@
+.banner-container {
+    align-items: center;
+    background-image: url(../../assets/banner.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem;
+}
+
+.banner-container h6 {
+    color: #fff;
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+}
+
+.banner-container h1 {
+    color: #fff;
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.welcome-container {
+    margin: 5rem 0 0 0;
+}
+
+.welcome-img {
+    padding: 0 0 0 10%;
+}
+
+.welcome-text {
+    padding: 0 10% 0 0;
+}
+
+.welcome-text h3 {
+    color: #131230;
+    font-family: "Playfair Display", serif;
+    font-size: 36px !important;
+    font-weight: 700;
+    margin: 0;
+}
+
+.welcome-text p {
+    color: #777;
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+}
+
+.template-btn {
+    background: #ffb606;
+    color: #131230;
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: .5rem 1.3rem .5rem 1.3rem;
+}
+
+.footer-copyright {
+    background: #0d0d27;
+    color: #fff;
+    margin: 5rem 0 0 0;
+    padding: 2rem 0;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-content a {
+    color: #ffb606;
+}
+ 
+@media(max-width: 768px) {
+    .banner-container {
+        padding: 10rem 1rem 10rem 1rem;
+    }
+
+    .banner-container h1 {
+        font-size: 2rem;
+    }
+}

@@ -1,55 +1,56 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-/* Route strings imported */
-
 import * as ROUTES from '../../constants/routes'
 
 const {
-  ACCOUNT,
   RECIPES,
   ADD_RECIPE,
-  SEARCH
+  SEARCH,
+  SETTINGS
 } = ROUTES
 
 const NavigationAuth = () => (
-  <div className='navbar navbar-expand-sm navbar-light bg-white'>
-    <Link className='navbar-brand' to={RECIPES}>GoToRecipes</Link>
-    <button
-      className='navbar-toggler'
-      type='button'
-      data-toggle='collapse'
-      data-target='#navbarNavAltMarkup'
-      aria-controls='navbarNavAltMarkup'
-      aria-expanded='false'
-      aria-label='Toggle navigation'>
-      <span className='navbar-toggler-icon' />
-    </button>
-    <div className='collapse navbar-collapse justify-content-end' id='navbarNavAltMarkup'>
-      <div className='navbar'>
-        <Link className='nav-item'
-          style={{ display: 'block', padding: '0.5rem' }}
-          to={RECIPES}>
-          My recipes
-        </Link>
-        <Link className='nav-item'
-          style={{ display: 'block', padding: '0.5rem' }}
-          to={ADD_RECIPE}>
-          Add a recipe
-        </Link>
-        <Link className='nav-item'
-          style={{ display: 'block', padding: '0.5rem' }}
-          to={SEARCH}>
-          <i className='fas fa-search' />
-        </Link>
+  <div
+    className='collapse navbar-collapse main-menu'
+    id='navbarContent'>
+    <ul className='navbar-nav'>
+      <li className='nav-item'>
         <Link
-          className='nav-item nav-link'
-          style={{ display: 'block', padding: '0.5rem' }}
-          to={ACCOUNT}>
-          <i className='fas fa-cog' />
+          className='nav-link'
+          to='/'>
+          HOME
         </Link>
-      </div>
-    </div>
+      </li>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to={RECIPES}>
+          MY RECIPES
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to={ADD_RECIPE}>
+          ADD RECIPE
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to={SEARCH}>
+          SEARCH
+        </Link>
+      </li>
+      <li className='nav-item'>
+        <Link
+          className='nav-link'
+          to={SETTINGS}>
+          SETTINGS
+        </Link>
+      </li>
+    </ul>
   </div>
 )
 

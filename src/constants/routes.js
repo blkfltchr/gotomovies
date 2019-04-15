@@ -8,8 +8,8 @@ export const SEARCH = '/search'
 
 // *** Protected Routes *** //
 
-export const ACCOUNT = '/account'
 export const RECIPES = '/recipes'
 export const ADD_RECIPE = '/recipes/add'
 export const EDIT_RECIPE = '/recipes/edit/:id'
 export const RECIPE = '/recipes/:id'
+export const SETTINGS = '/settings'

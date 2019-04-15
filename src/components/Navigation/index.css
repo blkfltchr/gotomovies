@@ -1,0 +1,59 @@
+.logo {
+  display: flex;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.logo img {
+  height: 3rem;
+}
+
+.logo h1 {
+  color: #000;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: .5rem;
+  text-decoration: none;
+}
+
+.prime-color {
+  color: #ffb606;
+  font-style: italic;
+}
+
+.toggle-button {
+  background: #ffb606;
+}
+
+.toggle-button span {
+  background: #fff;
+  display: block;
+  height: .2rem;
+  margin: .3rem 0;
+  width: 2rem;
+}
+
+.main-menu {
+  justify-content: flex-end;
+}
+
+.main-menu ul li {
+  padding: 1rem 2rem 0 0;
+}
+
+.main-menu ul a {
+  color: #ffb606;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
+@media (max-width: 991px) {
+  .main-menu {
+    background: #f9f9ff;
+  }
+}
