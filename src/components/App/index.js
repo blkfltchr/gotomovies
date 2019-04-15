@@ -7,8 +7,9 @@ import Landing from '../Landing'
 import Account from '../Account'
 import Recipes from '../Recipes'
 import Search from '../Search'
-import SingleRecipe from '../SingleRecipe'
+import Recipe from '../Recipe'
 import AddRecipe from '../AddRecipe'
+import EditRecipe from '../EditRecipe'
 import SignUp from '../SignUp'
 import LogIn from '../LogIn'
 import PasswordForget from '../PasswordForget'
@@ -24,7 +25,8 @@ const {
   ACCOUNT,
   RECIPES,
   ADD_RECIPE,
-  SINGLE_RECIPE,
+  EDIT_RECIPE,
+  RECIPE,
   SEARCH,
   SIGNUP,
   LOGIN,
@@ -44,7 +46,8 @@ const App = () => {
         <Route exact path={SEARCH} component={Search} />
         <Route exact path={RECIPES} component={Recipes} />
         <Route exact path={ADD_RECIPE} component={AddRecipe} />
-        <Route exact path={SINGLE_RECIPE} component={SingleRecipe} />
+        <Route exact path={EDIT_RECIPE} component={EditRecipe} />
+        <Route exact path={RECIPE} component={Recipe} />
       </Switch>
     </div>
   )

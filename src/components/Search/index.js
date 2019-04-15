@@ -56,7 +56,7 @@ class Search extends Component {
     if (text) {
       const filteredRecipes = recipes.filter(recipe =>
         recipe.title.match(regexTitle) ||
-          recipe.ingredients.join(' ').match(regexIngredient))
+          recipe.ingredients.join('').match(regexIngredient))
 
       if (filteredRecipes.length) {
         this.setState({
@@ -107,7 +107,9 @@ class Search extends Component {
               onChange={this.handleOnChange}
             />
             <span className='input-group-append'>
-              <div className='input-group-text'><i className='fa fa-search' /></div>
+              <div className='input-group-text'>
+                <i className='fa fa-search' />
+              </div>
             </span>
           </div>
         </div>
@@ -116,9 +118,19 @@ class Search extends Component {
           : <div className='recipe-list'>
             {filteredRecipes.length
               ? filteredRecipes.map((recipe, index) =>
-                <Link style={{ textDecoration: 'none' }} key={index} to={`/recipes/${recipe.id}`}><RecipeCard recipe={recipe} /></Link>)
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  key={index}
+                  to={`/recipes/${recipe.id}`}>
+                  <RecipeCard key={index} recipe={recipe} />
+                </Link>)
               : recipes.map((recipe, index) =>
-                <Link style={{ textDecoration: 'none' }} key={index} to={`/recipes/${recipe.id}`}><RecipeCard recipe={recipe} /></Link>)}
+                <Link
+                  style={{ textDecoration: 'none' }}
+                  key={index}
+                  to={`/recipes/${recipe.id}`}>
+                  <RecipeCard key={index} recipe={recipe} />
+                </Link>)}
           </div>}
       </div>
     )

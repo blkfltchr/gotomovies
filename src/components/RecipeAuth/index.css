@@ -1,0 +1,40 @@
+.ingredients-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.ingredient {
+  display: flex;
+  width: 45%;
+}
+
+.ingredient-input {
+  border-radius: .25rem 0 0 .25rem;
+}
+
+.delete-ingredient {
+  border-radius: 0 .25rem .25rem 0;
+}
+
+.add-ingredient {
+  margin-bottom: 1rem;
+}
+
+.instructions {
+  resize: none
+}
+
+.mealType input {
+  margin: 0 1rem 0 1rem;
+}
+
+@media(max-width: 500px) {
+  .ingredients-list {
+    flex-direction: column;
+  }
+
+  .ingredient {
+    width: 100%;
+  }
+}

@@ -18,8 +18,7 @@ const withAuthorization = condition => Component => {
           if (!condition(authUser)) {
             this.props.history.push(LOGIN)
           }
-        }
-      )
+        })
     }
 
     componentWillUnmount () {
