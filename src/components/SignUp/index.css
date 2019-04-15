@@ -1,12 +1,23 @@
-.jumbo-background {
-    background-image: url(../../assets/banner.jpg);
-    background-size: cover;
-    height: 90vh;
-  }
+.signup-container {
+  align-items: center;
+  background-image: url(../../assets/banner.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  padding: 10rem;
+}
 
-.signup-box {
-  width: 500px; 
-  background-color: #f6f9fc; 
-  padding: 20px 40px; 
-  border-radius: 10px
+.signup-container h1 {
+  color: #fff;
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.signup-form {
+  width: 50%;
 }

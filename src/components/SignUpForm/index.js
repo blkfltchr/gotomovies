@@ -7,8 +7,6 @@ import { withRouter } from 'react-router-dom'
 
 import { compose } from 'recompose'
 
-/* Route strings imported */
-
 import * as ROUTES from '../../constants/routes'
 
 const { LANDING } = ROUTES
@@ -88,39 +86,33 @@ class SignUpForm extends Component {
       passwordOne !== passwordTwo
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <div className='form-group'>
-          <input
-            name='email'
-            value={email}
-            onChange={this.onChange}
-            type='email'
-            className='form-control'
-            placeholder='Email Address'
-          />
-        </div>
-        <div className='form-row'>
-          <div className='col'>
-            <input
-              name='passwordOne'
-              value={passwordOne}
-              onChange={this.onChange}
-              type='password'
-              className='form-control'
-              placeholder='Password'
-            />
-          </div>
-          <div className='col'>
-            <input
-              name='passwordTwo'
-              value={passwordTwo}
-              onChange={this.onChange}
-              type='password'
-              className='form-control'
-              placeholder='Confirm Password'
-            />
-          </div>
-        </div>
+      <form
+        className='signup-form'
+        onSubmit={this.onSubmit}>
+        <input
+          name='email'
+          value={email}
+          onChange={this.onChange}
+          type='email'
+          className='form-control'
+          placeholder='Email Address'
+        />
+        <input
+          name='passwordOne'
+          value={passwordOne}
+          onChange={this.onChange}
+          type='password'
+          className='form-control'
+          placeholder='Password'
+        />
+        <input
+          name='passwordTwo'
+          value={passwordTwo}
+          onChange={this.onChange}
+          type='password'
+          className='form-control'
+          placeholder='Confirm Password'
+        />
         <button disabled={isInvalid} type='submit' className='btn btn-primary my-3'>Sign Up</button>
         {error && <p className='text-danger'>{error.message}</p>}
       </form>
